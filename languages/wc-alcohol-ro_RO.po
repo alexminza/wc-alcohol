@@ -1,0 +1,108 @@
+# Copyright (C) 2018 WooCommerce Alcohol Sale Restrictions
+# This file is distributed under the same license as the WooCommerce Alcohol Sale Restrictions package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/Alcohol\n"
+"POT-Creation-Date: 2018-02-20 18:14+0200\n"
+"PO-Revision-Date: 2018-02-20 18:14+0200\n"
+"Last-Translator: Alexander Minza <alex@alexminza.com>\n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+
+#: wc-alcohol.php:84
+msgid "Alcohol sale restrictions"
+msgstr "Restricții vânzare alcool"
+
+#: wc-alcohol.php:150
+msgid "Settings"
+msgstr "Setări"
+
+#: wc-alcohol.php:171
+msgid "Alcohol sale limitations during restriction hours"
+msgstr "Interdicții de vânzare alcool în timpul orelor de restricție"
+
+#: wc-alcohol.php:177
+msgid "Enable restrictions"
+msgstr "Activează restricții"
+
+#: wc-alcohol.php:178
+msgid "Enable sale limitations during restriction hours"
+msgstr "Activează interdicția de vânzare alcool în timpul orelor de restricție"
+
+#: wc-alcohol.php:184
+msgid "Restriction time start"
+msgstr "Început restricție"
+
+#: wc-alcohol.php:185
+msgid "Example: 22:00"
+msgstr "Exemplu: 22:00"
+
+#: wc-alcohol.php:192
+msgid "Restriction time end"
+msgstr "Sfârșit restricție"
+
+#: wc-alcohol.php:193
+msgid "Example: 09:00"
+msgstr "Exemplu: 09:00"
+
+#: wc-alcohol.php:200
+msgid "Restricted categories"
+msgstr "Categorii restricționate"
+
+#: wc-alcohol.php:206
+msgid "Select restricted categories"
+msgstr "Selectează categoriile restricționate"
+
+#: wc-alcohol.php:213
+msgid "Warning message"
+msgstr "Mesaj de avertizare"
+
+#: wc-alcohol.php:214
+msgid ""
+"Warning message displayed to the customers when trying to purchase products "
+"from the selected categories during restriction hours."
+msgstr ""
+"Mesajul de avertizare afișat clienților la încercarea de a cumpăra produse "
+"din categoriile selectate în intervalul orar restricționat."
+
+#: wc-alcohol.php:215
+msgid ""
+"Format: %1$s - Category, %2$s - Restriction time start, %3$s - Restriction "
+"time end"
+msgstr ""
+"Format: %1$s - Categorie, %2$s - Început restricție, %3$s - Sfârșit "
+"restricție"
+
+#: wc-alcohol.php:216
+msgid ""
+"The sale of products in the \"%1$s\" category is prohibited from %2$s to "
+"%3$s."
+msgstr ""
+"Produsele din categoria \"%1$s\" nu pot fi comercializate între orele %2$s - "
+"%3$s."
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Alcohol Sale Restrictions"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WooCommerce alcohol sale limitations during restriction hours"
+msgstr "Interdicții de vânzare alcool în timpul orelor de restricție"
+
+#. Author of the plugin/theme
+msgid "Alexander Minza"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://alexminza.com/"
+msgstr ""
+
+#~ msgid "Category"
+#~ msgstr "Categorie"

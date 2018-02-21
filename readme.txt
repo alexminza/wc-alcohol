@@ -32,7 +32,7 @@ Use the WooCommerce -> Settings -> Products -> Alcohol sale restrictions screen 
 == Changelog ==
 
 = 1.0 =
-* Initial release
+Initial release
 
 == Upgrade Notice ==
 

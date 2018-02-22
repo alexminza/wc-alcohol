@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Alcohol Sale Restrictions
  * Description: WooCommerce alcohol sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Alexander Minza
  * Author URI: http://alexminza.com/
  * Developer: Alexander Minza
@@ -37,6 +37,8 @@ if(!class_exists(WC_Alcohol::class)) :
 		const MOD_SETTINGS_RESTRICTION_END   = self::MOD_SETTINGS_PREFIX . 'restriction_end';
 		const MOD_SETTINGS_CATEGORY          = self::MOD_SETTINGS_PREFIX . 'category';
 		const MOD_SETTINGS_WARNING           = self::MOD_SETTINGS_PREFIX . 'warning';
+		const MOD_SETTINGS_WARN_PRODUCT      = self::MOD_SETTINGS_PREFIX . 'warn_product';
+		const MOD_SETTINGS_WARN_CATEGORY     = self::MOD_SETTINGS_PREFIX . 'warn_category';
 
 		const RESTRICTION_START    = '22:00';
 		const RESTRICTION_END      = '09:00';
@@ -61,6 +63,8 @@ if(!class_exists(WC_Alcohol::class)) :
 			$this->restriction_end       = get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END);
 			$this->restricted_categories = get_option(self::MOD_SETTINGS_CATEGORY, self::RESTRICTION_CATEGORY);
 			$this->warning_template      = get_option(self::MOD_SETTINGS_WARNING);
+			$this->warn_product          = 'yes' === get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes');
+			$this->warn_category         = 'yes' === get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes');
 
 			add_action('init', array($this, 'init'));
 		}
@@ -102,7 +106,7 @@ if(!class_exists(WC_Alcohol::class)) :
 			if(!$this->validate_settings())
 				$this->enabled = false;
 
-			//region Add WC hooks
+			//region Add WooCommerce hooks
 			if(is_admin()) {
 				add_filter('woocommerce_get_sections_products', array($this, 'get_sections_products'));
 				add_filter('woocommerce_get_settings_products', array($this, 'get_settings_products'), 10, 2);
@@ -111,8 +115,12 @@ if(!class_exists(WC_Alcohol::class)) :
 
 			if($this->enabled) {
 				add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 10, 2);
-				add_action('woocommerce_single_product_summary', array($this, 'single_product_summary'), 20);
-				add_action('woocommerce_archive_description', array($this, 'archive_description'), 10);
+
+				if($this->warn_product)
+					add_action('woocommerce_single_product_summary', array($this, 'single_product_summary'), 20);
+				
+				if($this->warn_category)
+					add_action('woocommerce_archive_description', array($this, 'archive_description'), 10);
 			}
 			//endregion
 		}
@@ -177,7 +185,7 @@ if(!class_exists(WC_Alcohol::class)) :
 					'type'     => 'checkbox',
 					'name'     => __('Enable restrictions', self::MOD_TEXT_DOMAIN),
 					'desc'     => __('Enable sale limitations during restriction hours', self::MOD_TEXT_DOMAIN),
-					'default'  => 'yes'
+					'default'  => 'no'
 				);
 
 				$settings_mod[] = array(
@@ -215,6 +223,23 @@ if(!class_exists(WC_Alcohol::class)) :
 					'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', self::MOD_TEXT_DOMAIN),
 					'desc'     => __('Format: %1$s - Category, %2$s - Restriction time start, %3$s - Restriction time end', self::MOD_TEXT_DOMAIN),
 					'default'  => __('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', self::MOD_TEXT_DOMAIN)
+				);
+
+				$settings_mod[] = array(
+					'id'       => self::MOD_SETTINGS_WARN_PRODUCT,
+					'type'     => 'checkbox',
+					'title'    => __('Show warning on', self::MOD_TEXT_DOMAIN),
+					'desc'     => __('Product pages', self::MOD_TEXT_DOMAIN),
+					'default'  => 'yes',
+					'checkboxgroup' => 'start'
+				);
+
+				$settings_mod[] = array(
+					'id'       => self::MOD_SETTINGS_WARN_CATEGORY,
+					'type'     => 'checkbox',
+					'desc'     => __('Category pages', self::MOD_TEXT_DOMAIN),
+					'default'  => 'yes',
+					'checkboxgroup' => 'end'
 				);
 
 				$settings_mod[] = array(
@@ -312,7 +337,7 @@ if(!class_exists(WC_Alcohol::class)) :
 				return true;
 		}
 
-		//region WC hooks
+		//region WooCommerce hooks
 		function is_purchasable($is_purchasable, $object) {
 			if(!$this->validate_product($object->get_id(), false))
 				$is_purchasable = false;
@@ -321,6 +346,9 @@ if(!class_exists(WC_Alcohol::class)) :
 		}
 
 		public function single_product_summary() {
+			if(!$this->warn_product)
+				return;
+
 			global $product;
 			$product_id = $product->get_id();
 
@@ -332,6 +360,9 @@ if(!class_exists(WC_Alcohol::class)) :
 		}
 
 		public function archive_description() {
+			if(!$this->warn_category)
+				return;
+
 			if (is_product_category()) {
 				global $wp_query;
 				$category = $wp_query->get_queried_object();
@@ -374,5 +405,6 @@ if(!class_exists(WC_Alcohol::class)) :
 		}
 	}
 
+	//initialize plugin
 	add_action('plugins_loaded', array(WC_Alcohol::class, 'get_instance'));
 endif;

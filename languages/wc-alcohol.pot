@@ -3,9 +3,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.0.1\n"
+"Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/alexminza/wc-alcohol/issues\n"
-"POT-Creation-Date: 2018-02-21 15:21+0200\n"
+"POT-Creation-Date: 2018-02-22 21:52+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,64 +14,76 @@ msgstr ""
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: wc-alcohol.php:85
+#: wc-alcohol.php:89
 msgid "Alcohol sale restrictions"
 msgstr ""
 
-#: wc-alcohol.php:151
+#: wc-alcohol.php:159
 msgid "Settings"
 msgstr ""
 
-#: wc-alcohol.php:172
+#: wc-alcohol.php:180
 msgid "Alcohol sale limitations during restriction hours"
 msgstr ""
 
-#: wc-alcohol.php:178
+#: wc-alcohol.php:186
 msgid "Enable restrictions"
 msgstr ""
 
-#: wc-alcohol.php:179
+#: wc-alcohol.php:187
 msgid "Enable sale limitations during restriction hours"
 msgstr ""
 
-#: wc-alcohol.php:185
+#: wc-alcohol.php:193
 msgid "Restriction time start"
 msgstr ""
 
-#: wc-alcohol.php:186
+#: wc-alcohol.php:194
 msgid "Example: 22:00"
 msgstr ""
 
-#: wc-alcohol.php:193
+#: wc-alcohol.php:201
 msgid "Restriction time end"
 msgstr ""
 
-#: wc-alcohol.php:194
+#: wc-alcohol.php:202
 msgid "Example: 09:00"
 msgstr ""
 
-#: wc-alcohol.php:201
+#: wc-alcohol.php:209
 msgid "Restricted categories"
 msgstr ""
 
-#: wc-alcohol.php:207
+#: wc-alcohol.php:215
 msgid "Select restricted categories"
 msgstr ""
 
-#: wc-alcohol.php:214
+#: wc-alcohol.php:222
 msgid "Warning message"
 msgstr ""
 
-#: wc-alcohol.php:215
+#: wc-alcohol.php:223
 msgid "Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours."
 msgstr ""
 
-#: wc-alcohol.php:216
+#: wc-alcohol.php:224
 msgid "Format: %1$s - Category, %2$s - Restriction time start, %3$s - Restriction time end"
 msgstr ""
 
-#: wc-alcohol.php:217
+#: wc-alcohol.php:225
 msgid "The sale of products in the \"%1$s\" category is prohibited from %2$s to %3$s."
+msgstr ""
+
+#: wc-alcohol.php:231
+msgid "Show warning on"
+msgstr ""
+
+#: wc-alcohol.php:232
+msgid "Product pages"
+msgstr ""
+
+#: wc-alcohol.php:240
+msgid "Category pages"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

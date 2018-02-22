@@ -28,13 +28,18 @@ Use the WooCommerce -> Settings -> Products -> Alcohol sale restrictions screen 
 == Screenshots ==
 
 1. Plugin settings
+2. Product page warning
+3. Category page warning
 
 == Changelog ==
+
+= 1.0.2 =
+Display warning options on product and category pages
 
 = 1.0 =
 Initial release
 
 == Upgrade Notice ==
 
-= 1.0 =
-Initial release
+= 1.0.2 =
+Display warning options on product and category pages

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/alexminza/wc-alcohol/issues\n"
-"POT-Creation-Date: 2018-02-22 21:52+0200\n"
-"PO-Revision-Date: 2018-02-22 21:52+0200\n"
+"POT-Creation-Date: 2018-03-12 13:35+0200\n"
+"PO-Revision-Date: 2018-03-12 13:39+0200\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -16,55 +16,55 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: wc-alcohol.php:89
+#: wc-alcohol.php:91
 msgid "Alcohol sale restrictions"
 msgstr "Ограничения продажи алкоголя"
 
-#: wc-alcohol.php:159
+#: wc-alcohol.php:161
 msgid "Settings"
 msgstr "Настройки"
 
-#: wc-alcohol.php:180
+#: wc-alcohol.php:182
 msgid "Alcohol sale limitations during restriction hours"
 msgstr "Запрет продажи алкоголя во время действия ограничений"
 
-#: wc-alcohol.php:186
+#: wc-alcohol.php:188
 msgid "Enable restrictions"
 msgstr "Включить ограничения"
 
-#: wc-alcohol.php:187
+#: wc-alcohol.php:189
 msgid "Enable sale limitations during restriction hours"
 msgstr "Включить запрет продажи алкоголя во время действия ограничений"
 
-#: wc-alcohol.php:193
+#: wc-alcohol.php:195
 msgid "Restriction time start"
 msgstr "Начало ограничения"
 
-#: wc-alcohol.php:194
+#: wc-alcohol.php:196
 msgid "Example: 22:00"
 msgstr "Пример: 22:00"
 
-#: wc-alcohol.php:201
+#: wc-alcohol.php:203
 msgid "Restriction time end"
 msgstr "Конец ограничения"
 
-#: wc-alcohol.php:202
+#: wc-alcohol.php:204
 msgid "Example: 09:00"
 msgstr "Пример: 09:00"
 
-#: wc-alcohol.php:209
+#: wc-alcohol.php:211
 msgid "Restricted categories"
 msgstr "Ограниченные категории"
 
-#: wc-alcohol.php:215
+#: wc-alcohol.php:217
 msgid "Select restricted categories"
 msgstr "Выберите ограниченные категории"
 
-#: wc-alcohol.php:222
+#: wc-alcohol.php:224
 msgid "Warning message"
 msgstr "Предупреждающее сообщение"
 
-#: wc-alcohol.php:223
+#: wc-alcohol.php:225
 msgid ""
 "Warning message displayed to the customers when trying to purchase products "
 "from the selected categories during restriction hours."
@@ -72,47 +72,31 @@ msgstr ""
 "Предупреждающее сообщение, отображаемое клиентам при попытке приобрести "
 "товары из выбранных категорий во время действия ограничений."
 
-#: wc-alcohol.php:224
+#: wc-alcohol.php:226
 msgid ""
 "Format: %1$s - Category, %2$s - Restriction time start, %3$s - Restriction "
 "time end"
 msgstr ""
 "Формат: %1$s - Категория, %2$s - Начало ограничения, %3$s - Конец ограничения"
 
-#: wc-alcohol.php:225
+#: wc-alcohol.php:227
 msgid ""
 "The sale of products in the \"%1$s\" category is prohibited from %2$s to "
 "%3$s."
 msgstr "Продажа товаров из категории “%1$s” запрещена с %2$s до %3$s."
 
-#: wc-alcohol.php:231
+#: wc-alcohol.php:233
 msgid "Show warning on"
 msgstr "Показывать предупреждение на"
 
-#: wc-alcohol.php:232
+#: wc-alcohol.php:234
 msgid "Product pages"
 msgstr "Страницах товаров"
 
-#: wc-alcohol.php:240
+#: wc-alcohol.php:242
 msgid "Category pages"
 msgstr "Страницах категорий"
 
-#. Plugin Name of the plugin/theme
-msgid "WooCommerce Alcohol Sale Restrictions"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "https://wordpress.org/plugins/wc-alcohol/"
-msgstr ""
-
 #. Description of the plugin/theme
 msgid "WooCommerce alcohol sale limitations during restriction hours"
-msgstr "Запрет продажи алкоголя во время действия ограничений"
-
-#. Author of the plugin/theme
-msgid "Alexander Minza"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "http://alexminza.com/"
-msgstr ""
+msgstr "Запрет продажи алкоголя для WooCommerce во время действия ограничений"

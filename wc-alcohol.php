@@ -5,9 +5,9 @@
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
  * Version: 1.0.2
  * Author: Alexander Minza
- * Author URI: http://alexminza.com/
+ * Author URI: https://profiles.wordpress.org/alexminza
  * Developer: Alexander Minza
- * Developer URI: http://alexminza.com/
+ * Developer URI: https://profiles.wordpress.org/alexminza
  * Text Domain: wc-alcohol
  * Domain Path: /languages
  * License: GPLv3 or later
@@ -15,11 +15,13 @@
  * Requires at least: 4.8
  * Tested up to: 4.9.4
  * WC requires at least: 3.2
- * WC tested up to: 3.3.1
+ * WC tested up to: 3.3.3
  */
 
+//Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
+
 if(!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+	exit; // Exit if accessed directly
 }
 
 if(!class_exists(WC_Alcohol::class)) :
@@ -118,7 +120,7 @@ if(!class_exists(WC_Alcohol::class)) :
 
 				if($this->warn_product)
 					add_action('woocommerce_single_product_summary', array($this, 'single_product_summary'), 20);
-				
+
 				if($this->warn_category)
 					add_action('woocommerce_archive_description', array($this, 'archive_description'), 10);
 			}

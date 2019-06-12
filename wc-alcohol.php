@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Alcohol Sale Restrictions
  * Description: WooCommerce alcohol sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Alexander Minza
  * Author URI: https://profiles.wordpress.org/alexminza
  * Developer: Alexander Minza
@@ -13,9 +13,9 @@
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Requires at least: 4.8
- * Tested up to: 4.9.4
+ * Tested up to: 5.2.1
  * WC requires at least: 3.2
- * WC tested up to: 3.3.4
+ * WC tested up to: 3.6.4
  */
 
 //Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
@@ -86,7 +86,7 @@ if(!class_exists(WC_Alcohol::class)) :
 		}
 
 		public function init() {
-			load_plugin_textdomain(self::MOD_TEXT_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages/');
+			load_plugin_textdomain(self::MOD_TEXT_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages');
 
 			$this->mod_title = __('Alcohol sale restrictions', self::MOD_TEXT_DOMAIN);
 
@@ -223,7 +223,7 @@ if(!class_exists(WC_Alcohol::class)) :
 					'type'     => 'textarea',
 					'name'     => __('Warning message', self::MOD_TEXT_DOMAIN),
 					'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', self::MOD_TEXT_DOMAIN),
-					'desc'     => __('Format: %1$s - Category, %2$s - Restriction time start, %3$s - Restriction time end', self::MOD_TEXT_DOMAIN),
+					'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', self::MOD_TEXT_DOMAIN),
 					'default'  => __('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', self::MOD_TEXT_DOMAIN)
 				);
 
@@ -266,7 +266,7 @@ if(!class_exists(WC_Alcohol::class)) :
 			//https://developer.wordpress.org/reference/functions/get_categories/
 			$categories = get_categories($args);
 
-			if(is_wp_error($categories))
+			if(empty($categories) || is_wp_error($categories))
 				return array();
 
 			return $categories;
@@ -296,17 +296,24 @@ if(!class_exists(WC_Alcohol::class)) :
 			return true;
 		}
 
-		protected function get_product_restricted_categories($product_id) {
-			$product_categories = get_the_terms($product_id, 'product_cat');
-			$product_cat_slugs = array_column($product_categories, 'slug');
-			$restricted_categories = array_intersect($this->restricted_categories, $product_cat_slugs);
+		/*protected function get_product_restricted_categories($product_id) {
+			$categories = get_the_terms($product_id, 'product_cat');
+
+			if(empty($categories) || is_wp_error($categories))
+				return array();
+
+			$slugs = wp_list_pluck($categories, 'slug');
+			$restricted_categories = array_intersect($this->restricted_categories, $slugs);
 
 			return $restricted_categories;
-		}
+		}*/
 
 		protected function get_product_restricted_category($product_id) {
 			//https://developer.wordpress.org/reference/functions/get_the_terms/
 			$categories = get_the_terms($product_id, 'product_cat');
+
+			if(empty($categories) || is_wp_error($categories))
+				return null;
 
 			foreach($categories as $category) {
 				if($this->is_restricted_category($category->slug))
@@ -368,6 +375,9 @@ if(!class_exists(WC_Alcohol::class)) :
 			if (is_product_category()) {
 				global $wp_query;
 				$category = $wp_query->get_queried_object();
+
+				if(empty($category) || is_wp_error($category))
+					return;
 
 				if(!$this->validate_category($category)) {
 					$warning_message = $this->get_warning_message($category->slug);

@@ -3,7 +3,7 @@ Contributors: alexminza
 Donate link: https://www.paypal.me/AlexMinza
 Tags: woocommerce, alcohol, sale, restriction
 Requires at least: 4.8
-Tested up to: 4.9.7
+Tested up to: 5.2.1
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv3 or later
@@ -41,6 +41,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 3. Category page warning
 
 == Changelog ==
+
+= 1.0.4 =
+Fix PHP warnings
 
 = 1.0.3 =
 Check WooCommerce is active during plugin initialization

@@ -3,7 +3,7 @@ Contributors: alexminza
 Donate link: https://www.paypal.me/AlexMinza
 Tags: woocommerce, alcohol, sale, restriction
 Requires at least: 4.8
-Tested up to: 5.2.1
+Tested up to: 5.3
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv3 or later

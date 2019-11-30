@@ -13,9 +13,9 @@
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Requires at least: 4.8
- * Tested up to: 5.2.1
+ * Tested up to: 5.3
  * WC requires at least: 3.2
- * WC tested up to: 3.6.4
+ * WC tested up to: 3.8.1
  */
 
 //Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol

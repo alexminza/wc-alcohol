@@ -4,6 +4,8 @@ Donate link: https://www.paypal.me/AlexMinza
 Tags: woocommerce, alcohol, sale, restriction
 Requires at least: 4.8
 Tested up to: 5.3
+WC requires at least: 3.2
+WC tested up to: 3.8.1
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv3 or later
@@ -26,7 +28,7 @@ WooCommerce alcohol sale limitations during restriction hours
 
 = How can I configure the plugin settings? =
 
-Use the WooCommerce -> Settings -> Products -> Alcohol sale restrictions screen to configure the plugin.
+Use the *WooCommerce > Settings > Products > Alcohol sale restrictions* screen to configure the plugin.
 
 = How can I contribute to the plugin? =
 
@@ -42,6 +44,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 == Changelog ==
 
+= 1.0.5 =
+Minor improvements
+
 = 1.0.4 =
 Fix PHP warnings
 
@@ -56,5 +61,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-Check WooCommerce is active during plugin initialization
+= 1.0.5 =
+Minor improvements

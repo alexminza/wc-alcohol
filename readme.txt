@@ -44,6 +44,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 == Changelog ==
 
+= 1.0.6 =
+Minor changes
+
 = 1.0.5 =
 Minor improvements
 
@@ -61,5 +64,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.5 =
-Minor improvements
+= 1.0.6 =
+Minor changes

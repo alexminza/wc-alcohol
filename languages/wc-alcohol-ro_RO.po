@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the WooCommerce Alcohol Sale Restrictions package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.0.7\n"
+"Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.0.8\n"
 "Report-Msgid-Bugs-To: https://github.com/alexminza/wc-alcohol/issues\n"
-"POT-Creation-Date: 2020-03-25 10:23+0200\n"
-"PO-Revision-Date: 2020-03-25 10:25+0200\n"
+"POT-Creation-Date: 2020-05-10 17:10+0300\n"
+"PO-Revision-Date: 2020-05-10 17:12+0300\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ro\n"

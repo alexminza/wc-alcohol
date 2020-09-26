@@ -3,7 +3,7 @@ Contributors: alexminza
 Donate link: https://www.paypal.me/AlexMinza
 Tags: woocommerce, alcohol, sale, restriction
 Requires at least: 4.8
-Tested up to: 5.4.1
+Tested up to: 5.5.1
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv3 or later
@@ -42,6 +42,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 == Changelog ==
 
+= 1.0.9 =
+Updated WC tested up to 4.5.2
+
 = 1.0.8 =
 Updated WC tested up to 4.1.0
 
@@ -68,5 +71,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.8 =
-Updated WC tested up to 4.1.0
+= 1.0.9 =
+Updated WC tested up to 4.5.2

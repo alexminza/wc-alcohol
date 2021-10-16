@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Alcohol Sale Restrictions
  * Description: WooCommerce alcohol sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
- * Version: 1.0.9
+ * Version: 1.1.0
  * Author: Alexander Minza
  * Author URI: https://profiles.wordpress.org/alexminza
  * Developer: Alexander Minza
@@ -13,9 +13,9 @@
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Requires at least: 4.8
- * Tested up to: 5.5.1
+ * Tested up to: 5.8.1
  * WC requires at least: 3.2
- * WC tested up to: 4.5.2
+ * WC tested up to: 5.7.1
  */
 
 //Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
@@ -330,8 +330,17 @@ if(!class_exists(WC_Alcohol::class)):
 				return TRUE;
 
 			$current_hour = intval(current_time('Hi'));
-			if($current_hour < $this->restriction_start_value && $current_hour > $this->restriction_end_value)
-				return TRUE;
+			if($this->restriction_start_value > $this->restriction_end_value) {
+				//overnight restriction
+				if($current_hour < $this->restriction_start_value && $current_hour >= $this->restriction_end_value)
+					return TRUE;
+			} else {
+				//intraday restrction
+				if($current_hour < $this->restriction_start_value || $current_hour >= $this->restriction_end_value)
+					return TRUE;
+			}
+
+			return FALSE;
 		}
 
 		//region WooCommerce hooks

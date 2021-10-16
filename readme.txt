@@ -3,7 +3,7 @@ Contributors: alexminza
 Donate link: https://www.paypal.me/AlexMinza
 Tags: woocommerce, alcohol, sale, restriction
 Requires at least: 4.8
-Tested up to: 5.5.1
+Tested up to: 5.8.1
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv3 or later
@@ -42,6 +42,11 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 == Changelog ==
 
+See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
+
+= 1.1.0 =
+Allow restriction time start and end in the same day
+
 = 1.0.9 =
 Updated WC tested up to 4.5.2
 
@@ -71,5 +76,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.9 =
-Updated WC tested up to 4.5.2
+= 1.1.0 =
+Allow restriction time start and end in the same day

@@ -1,19 +1,19 @@
 === WooCommerce Alcohol Sale Restrictions ===
 Contributors: alexminza
-Donate link: https://www.paypal.me/AlexMinza
-Tags: woocommerce, alcohol, sale, restriction
+Donate link: https://www.revolut.me/alexminza
+Tags: WooCommerce, alcohol, sale, time, restriction
 Requires at least: 4.8
-Tested up to: 5.8.1
+Tested up to: 6.3.1
 Stable tag: trunk
-Requires PHP: 7.0
+Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce alcohol sale limitations during restriction hours
+WooCommerce alcohol sale limitations during legal restriction hours
 
 == Description ==
 
-WooCommerce alcohol sale limitations during restriction hours
+WooCommerce alcohol sale limitations during legal restriction hours
 
 = Features =
 
@@ -43,6 +43,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 == Changelog ==
 
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
+
+= 1.1.1 =
+Added support for WooCommerce [High-Performance Order Storage (HPOS)](https://woocommerce.com/document/high-performance-order-storage/).
 
 = 1.1.0 =
 Allow restriction time start and end in the same day
@@ -76,5 +79,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-Allow restriction time start and end in the same day
+= 1.1.1 =
+Added support for WooCommerce [High-Performance Order Storage (HPOS)](https://woocommerce.com/document/high-performance-order-storage/)

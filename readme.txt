@@ -5,7 +5,7 @@ Tags: WooCommerce, alcohol, sale, time, restriction
 Requires at least: 4.8
 Tested up to: 6.3.2
 Stable tag: trunk
-Requires PHP: 7.2
+Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,6 +21,7 @@ WooCommerce alcohol sale limitations during legal restriction hours
 * Multiple restricted product categories
 * Customizable warning message
 * Display warning on product and category pages
+* Free to use – [Open-source GPL-3.0 license on GitHub](https://github.com/alexminza/wc-alcohol)
 
 == Frequently Asked Questions ==
 

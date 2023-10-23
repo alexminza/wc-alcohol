@@ -2,13 +2,13 @@
     "name": "alexminza/wc-alcohol",
     "description": "WooCommerce Alcohol Sale Restrictions",
     "type": "wordpress-plugin",
-    "keywords": ["woocommerce", "alcohol", "sale", "restriction"],
+    "keywords": ["WooCommerce", "alcohol", "sale", "time", "restriction"],
     "homepage": "https://github.com/alexminza/wc-alcohol",
     "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Alexander Minza",
-            "homepage": "http://alexminza.com",
+            "homepage": "https://www.alexminza.com",
             "role": "Developer"
         }
     ],
@@ -19,5 +19,10 @@
     },
     "require": {
         "php": ">=7.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.0"
+        }
     }
 }

@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Alcohol Sale Restrictions
  * Description: WooCommerce alcohol sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: Alexander Minza
  * Author URI: https://profiles.wordpress.org/alexminza
  * Developer: Alexander Minza
@@ -14,9 +14,9 @@
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Requires PHP: 7.0
  * Requires at least: 4.8
- * Tested up to: 6.3.2
+ * Tested up to: 6.4.1
  * WC requires at least: 3.2
- * WC tested up to: 8.2.1
+ * WC tested up to: 8.3.1
  */
 
 //Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
@@ -53,12 +53,10 @@ if(!class_exists(WC_Alcohol::class)):
 		 */
 		protected static $instance = null;
 
-		protected $logger, $enabled, $mod_title, $categories_list, $restriction_start, $restriction_end, $restriction_start_value, $restriction_end_value;
+		protected $enabled, $mod_title, $categories_list, $restriction_start, $restriction_end, $restriction_start_value, $restriction_end_value;
 		protected $restricted_categories, $warning_template, $warn_product, $warn_category;
 
 		private function __construct() {
-			$this->logger = wc_get_logger();
-
 			$this->enabled               = 'yes' === get_option(self::MOD_SETTINGS_ENABLED, 'no');
 			$this->restriction_start     = get_option(self::MOD_SETTINGS_RESTRICTION_START, self::RESTRICTION_START);
 			$this->restriction_end       = get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END);
@@ -400,8 +398,9 @@ if(!class_exists(WC_Alcohol::class)):
 		protected function log($message, $level = WC_Log_Levels::DEBUG) {
 			//https://woocommerce.wordpress.com/2017/01/26/improved-logging-in-woocommerce-2-7/
 			//https://stackoverflow.com/questions/1423157/print-php-call-stack
+			$logger = wc_get_logger();
 			$log_context = array('source' => self::MOD_ID);
-			$this->logger->log($level, $message, $log_context);
+			$logger->log($level, $message, $log_context);
 		}
 
 		protected static function string_empty($string) {

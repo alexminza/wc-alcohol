@@ -3,7 +3,7 @@ Contributors: alexminza
 Donate link: https://www.revolut.me/alexminza
 Tags: WooCommerce, alcohol, sale, time, restriction
 Requires at least: 4.8
-Tested up to: 6.3.2
+Tested up to: 6.4.1
 Stable tag: trunk
 Requires PHP: 7.0
 License: GPLv3 or later
@@ -44,6 +44,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 == Changelog ==
 
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
+
+= 1.1.2 =
+Minor logging fixes
 
 = 1.1.1 =
 Added support for WooCommerce [High-Performance Order Storage (HPOS)](https://woocommerce.com/document/high-performance-order-storage/).

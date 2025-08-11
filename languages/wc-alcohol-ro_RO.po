@@ -1,11 +1,11 @@
-# Copyright (C) 2018 WooCommerce Alcohol Sale Restrictions
-# This file is distributed under the same license as the WooCommerce Alcohol Sale Restrictions package.
+# Copyright (C) 2025 Alexander Minza
+# This file is distributed under the same license as the Alcohol Sale Restrictions for WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Alcohol Sale Restrictions 1.1.2\n"
+"Project-Id-Version: Alcohol Sale Restrictions for WooCommerce 1.1.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-alcohol\n"
-"POT-Creation-Date: 2023-12-04 14:26+0200\n"
-"PO-Revision-Date: 2023-12-04 14:28+0200\n"
+"POT-Creation-Date: 2025-08-11 14:30+0300\n"
+"PO-Revision-Date: 2025-08-11 14:40+0300\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -14,17 +14,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #. Plugin Name of the plugin
-msgid "WooCommerce Alcohol Sale Restrictions"
+#: wc-alcohol.php
+msgid "Alcohol Sale Restrictions for WooCommerce"
 msgstr "Restricții vânzare alcool pentru WooCommerce"
 
 #. Description of the plugin
-msgid "WooCommerce alcohol sale limitations during restriction hours"
-msgstr ""
-"Limitări pentru vânzarea de alcool în timpul orelor de restricție pentru "
-"WooCommerce"
+#: wc-alcohol.php wc-alcohol.php:179
+msgid "Alcohol sale limitations during restriction hours"
+msgstr "Limitări de vânzare alcool în timpul orelor de restricție"
 
 #: wc-alcohol.php:88
 msgid "Alcohol sale restrictions"
@@ -33,10 +33,6 @@ msgstr "Restricții vânzare alcool"
 #: wc-alcohol.php:158
 msgid "Settings"
 msgstr "Setări"
-
-#: wc-alcohol.php:179
-msgid "Alcohol sale limitations during restriction hours"
-msgstr "Interdicții de vânzare alcool în timpul orelor de restricție"
 
 #: wc-alcohol.php:185
 msgid "Enable restrictions"
@@ -83,6 +79,7 @@ msgstr ""
 "din categoriile selectate în intervalul orar restricționat."
 
 #: wc-alcohol.php:223
+#, php-format
 msgid ""
 "Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time "
 "start, <code>%3$s</code> - Restriction time end"
@@ -91,6 +88,7 @@ msgstr ""
 "restricție, <code>%3$s</code> - Sfârșit restricție"
 
 #: wc-alcohol.php:224
+#, php-format
 msgid ""
 "The sale of products in the \"%1$s\" category is prohibited from %2$s to "
 "%3$s."

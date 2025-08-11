@@ -1,19 +1,17 @@
-=== WooCommerce Alcohol Sale Restrictions ===
+=== Alcohol Sale Restrictions for WooCommerce ===
 Contributors: alexminza
 Donate link: https://www.revolut.me/alexminza
 Tags: WooCommerce, alcohol, sale, time, restriction
 Requires at least: 4.8
-Tested up to: 6.4.1
-Stable tag: trunk
+Tested up to: 6.8
+Stable tag: 1.1.3
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce alcohol sale limitations during legal restriction hours
-
 == Description ==
 
-WooCommerce alcohol sale limitations during legal restriction hours
+Alcohol sale limitations during legal restriction hours
 
 = Features =
 
@@ -45,43 +43,49 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
 
+= 1.1.3 =
+Adjusted plugin name to comply with the [WooCommerce trademark guidelines](https://woocommerce.com/trademark-guidelines/).
+
 = 1.1.2 =
-Minor logging fixes
+Minor logging fixes.
 
 = 1.1.1 =
 Added support for WooCommerce [High-Performance Order Storage (HPOS)](https://woocommerce.com/document/high-performance-order-storage/).
 
 = 1.1.0 =
-Allow restriction time start and end in the same day
+Allow restriction time start and end in the same day.
 
 = 1.0.9 =
-Updated WC tested up to 4.5.2
+Updated WC tested up to 4.5.2.
 
 = 1.0.8 =
-Updated WC tested up to 4.1.0
+Updated WC tested up to 4.1.0.
 
 = 1.0.7 =
-Updated WC tested up to 4.0.1
+Updated WC tested up to 4.0.1.
 
 = 1.0.6 =
-Minor changes
+Minor changes.
 
 = 1.0.5 =
-Minor improvements
+Minor improvements.
 
 = 1.0.4 =
-Fix PHP warnings
+Fix PHP warnings.
 
 = 1.0.3 =
-Check WooCommerce is active during plugin initialization
+Check WooCommerce is active during plugin initialization.
 
 = 1.0.2 =
-Display warning options on product and category pages
+Display warning options on product and category pages.
 
 = 1.0 =
-Initial release
+Initial release.
 
 == Upgrade Notice ==
 
+= 1.1.3 =
+Adjusted plugin name to comply with the [WooCommerce trademark guidelines](https://woocommerce.com/trademark-guidelines/).
+
 = 1.1.1 =
-Added support for WooCommerce [High-Performance Order Storage (HPOS)](https://woocommerce.com/document/high-performance-order-storage/)
+Added support for WooCommerce [High-Performance Order Storage (HPOS)](https://woocommerce.com/document/high-performance-order-storage/).

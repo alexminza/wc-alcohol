@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WooCommerce Alcohol Sale Restrictions
- * Description: WooCommerce alcohol sale limitations during restriction hours
+ * Plugin Name: Alcohol Sale Restrictions for WooCommerce
+ * Description: Alcohol sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Alexander Minza
  * Author URI: https://profiles.wordpress.org/alexminza
  * Developer: Alexander Minza
@@ -14,9 +14,10 @@
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Requires PHP: 7.0
  * Requires at least: 4.8
- * Tested up to: 6.4.1
+ * Tested up to: 6.8
  * WC requires at least: 3.2
- * WC tested up to: 8.3.1
+ * WC tested up to: 10.0.4
+ * Requires Plugins: woocommerce
  */
 
 //Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
@@ -29,7 +30,6 @@ if(!class_exists(WC_Alcohol::class)):
 	class WC_Alcohol {
 		#region Constants
 		const MOD_ID          = 'wc-alcohol';
-		const MOD_TEXT_DOMAIN = self::MOD_ID;
 
 		const MOD_SETTINGS_SECTION           = self::MOD_ID;
 		const MOD_SETTINGS_PREFIX            = self::MOD_SETTINGS_SECTION . '_';
@@ -57,13 +57,13 @@ if(!class_exists(WC_Alcohol::class)):
 		protected $restricted_categories, $warning_template, $warn_product, $warn_category;
 
 		private function __construct() {
-			$this->enabled               = 'yes' === get_option(self::MOD_SETTINGS_ENABLED, 'no');
+			$this->enabled               = wc_string_to_bool(get_option(self::MOD_SETTINGS_ENABLED, 'no'));
 			$this->restriction_start     = get_option(self::MOD_SETTINGS_RESTRICTION_START, self::RESTRICTION_START);
 			$this->restriction_end       = get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END);
 			$this->restricted_categories = get_option(self::MOD_SETTINGS_CATEGORY, self::RESTRICTION_CATEGORY);
 			$this->warning_template      = get_option(self::MOD_SETTINGS_WARNING);
-			$this->warn_product          = 'yes' === get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes');
-			$this->warn_category         = 'yes' === get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes');
+			$this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
+			$this->warn_category         = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes'));
 
 			add_action('init', array($this, 'init'));
 		}
@@ -83,9 +83,9 @@ if(!class_exists(WC_Alcohol::class)):
 		}
 
 		public function init() {
-			load_plugin_textdomain(self::MOD_TEXT_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages');
+			load_plugin_textdomain('wc-alcohol', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
-			$this->mod_title = __('Alcohol sale restrictions', self::MOD_TEXT_DOMAIN);
+			$this->mod_title = esc_html__('Alcohol sale restrictions', 'wc-alcohol');
 
 			#region Init categories
 			$categories = $this->get_product_categories();
@@ -155,7 +155,7 @@ if(!class_exists(WC_Alcohol::class)):
 			);
 
 			$plugin_links = array(
-				sprintf('<a href="%1$s">%2$s</a>', esc_url($settings_url), __('Settings', self::MOD_TEXT_DOMAIN))
+				sprintf('<a href="%1$s">%2$s</a>', esc_url($settings_url), esc_html__('Settings', 'wc-alcohol'))
 			);
 
 			return array_merge($plugin_links, $links);
@@ -176,59 +176,59 @@ if(!class_exists(WC_Alcohol::class)):
 					'id'   => self::MOD_SETTINGS_SECTION,
 					'name' => $this->mod_title,
 					'type' => 'title',
-					'desc' => __('Alcohol sale limitations during restriction hours', self::MOD_TEXT_DOMAIN),
+					'desc' => __('Alcohol sale limitations during restriction hours', 'wc-alcohol'),
 				);
 
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_ENABLED,
 					'type'     => 'checkbox',
-					'name'     => __('Enable restrictions', self::MOD_TEXT_DOMAIN),
-					'desc'     => __('Enable sale limitations during restriction hours', self::MOD_TEXT_DOMAIN),
+					'name'     => __('Enable restrictions', 'wc-alcohol'),
+					'desc'     => __('Enable sale limitations during restriction hours', 'wc-alcohol'),
 					'default'  => 'no'
 				);
 
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_RESTRICTION_START,
-					'name'     => __('Restriction time start', self::MOD_TEXT_DOMAIN),
-					'desc'     => __('Example: 22:00', self::MOD_TEXT_DOMAIN),
+					'name'     => __('Restriction time start', 'wc-alcohol'),
+					'desc'     => __('Example: 22:00', 'wc-alcohol'),
 					'type'     => 'text',
 					'default'  => self::RESTRICTION_START
 				);
 
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_RESTRICTION_END,
-					'name'     => __('Restriction time end', self::MOD_TEXT_DOMAIN),
-					'desc'     => __('Example: 09:00', self::MOD_TEXT_DOMAIN),
+					'name'     => __('Restriction time end', 'wc-alcohol'),
+					'desc'     => __('Example: 09:00', 'wc-alcohol'),
 					'type'     => 'text',
 					'default'  => self::RESTRICTION_END
 				);
 
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_CATEGORY,
-					'name'     => __('Restricted categories', self::MOD_TEXT_DOMAIN),
+					'name'     => __('Restricted categories', 'wc-alcohol'),
 					'type'     => 'multiselect',
 					'class'    => 'wc-enhanced-select',
 					'options'  => $this->categories_list,
 					'default'  => self::RESTRICTION_CATEGORY,
 					'custom_attributes' => array(
-						'data-placeholder' => __('Select restricted categories', self::MOD_TEXT_DOMAIN),
+						'data-placeholder' => esc_html__('Select restricted categories', 'wc-alcohol'),
 					)
 				);
 
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_WARNING,
 					'type'     => 'textarea',
-					'name'     => __('Warning message', self::MOD_TEXT_DOMAIN),
-					'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', self::MOD_TEXT_DOMAIN),
-					'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', self::MOD_TEXT_DOMAIN),
-					'default'  => __('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', self::MOD_TEXT_DOMAIN)
+					'name'     => __('Warning message', 'wc-alcohol'),
+					'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', 'wc-alcohol'),
+					'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', 'wc-alcohol'),
+					'default'  => esc_html__('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol')
 				);
 
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_WARN_PRODUCT,
 					'type'     => 'checkbox',
-					'title'    => __('Show warning on', self::MOD_TEXT_DOMAIN),
-					'desc'     => __('Product pages', self::MOD_TEXT_DOMAIN),
+					'title'    => __('Show warning on', 'wc-alcohol'),
+					'desc'     => __('Product pages', 'wc-alcohol'),
 					'default'  => 'yes',
 					'checkboxgroup' => 'start'
 				);
@@ -236,7 +236,7 @@ if(!class_exists(WC_Alcohol::class)):
 				$settings_mod[] = array(
 					'id'       => self::MOD_SETTINGS_WARN_CATEGORY,
 					'type'     => 'checkbox',
-					'desc'     => __('Category pages', self::MOD_TEXT_DOMAIN),
+					'desc'     => __('Category pages', 'wc-alcohol'),
 					'default'  => 'yes',
 					'checkboxgroup' => 'end'
 				);
@@ -404,16 +404,12 @@ if(!class_exists(WC_Alcohol::class)):
 		}
 
 		protected static function string_empty($string) {
-			return strlen($string) === 0;
-		}
-
-		public static function is_wc_active() {
-			//https://docs.woocommerce.com/document/create-a-plugin/
-			return in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')));
+			return is_null($string) || strlen($string) === 0;
 		}
 	}
 
-	if(WC_Alcohol::is_wc_active()) {
+	//https://docs.woocommerce.com/document/query-whether-woocommerce-is-activated/
+	if(!class_exists('WooCommerce')) {
 		add_action('plugins_loaded', array(WC_Alcohol::class, 'get_instance'));
 	}
 endif;

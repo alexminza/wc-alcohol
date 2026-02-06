@@ -32,7 +32,7 @@ class WC_Alcohol
     /**
      * Instance of this class.
      *
-     * @var object
+     * @var self|null
      */
     protected static $instance = null;
 
@@ -414,20 +414,16 @@ class WC_Alcohol
             return;
         }
 
-        /** @var \WC_Product $product */
-        global $product;
+        $product_id = get_the_ID();
 
-        if ($product && is_a($product, 'WC_Product')) {
-            $product_id = $product->get_id();
+        // Ensure we have a valid ID and it's a product context
+        if ($product_id && $this->validate_product($product_id, false) === false) {
+             $restricted_category = $this->get_product_restricted_category($product_id);
+             $warning_message = $this->get_warning_message($restricted_category);
 
-            if (!$this->validate_product($product_id, false)) {
-                $restricted_category = $this->get_product_restricted_category($product_id);
-                $warning_message = $this->get_warning_message($restricted_category);
-
-                if (!empty($warning_message)) {
-                    echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
-                }
-            }
+             if (!empty($warning_message)) {
+                 echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
+             }
         }
     }
 
@@ -441,10 +437,8 @@ class WC_Alcohol
         }
 
         if (is_product_category()) {
-            /** @var \WP_Query $wp_query */
-            global $wp_query;
-
-            $category = $wp_query->get_queried_object();
+            $category = get_queried_object();
+            
             if (empty($category) || is_wp_error($category)) {
                 return;
             }
@@ -454,7 +448,6 @@ class WC_Alcohol
 
                 if (!empty($warning_message)) {
                     echo wp_kses_post(sprintf('<div class="term-description">%1$s</div>', wc_format_content($warning_message)));
-                    // wc_add_notice($warning_message, 'error');
                 }
             }
         }

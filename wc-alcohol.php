@@ -3,7 +3,7 @@
  * Plugin Name: Alcohol Sale Restrictions for WooCommerce
  * Description: Alcohol sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
- * Version: 1.1.3
+ * Version: 1.2.0
  * Author: Alexander Minza
  * Author URI: https://profiles.wordpress.org/alexminza
  * Developer: Alexander Minza
@@ -12,15 +12,17 @@
  * Domain Path: /languages
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
- * Requires PHP: 7.0
+ * Requires PHP: 7.2.5
  * Requires at least: 4.8
- * Tested up to: 6.8
- * WC requires at least: 3.2
- * WC tested up to: 10.0.4
+ * Tested up to: 6.9.1
+ * WC requires at least: 3.3
+ * WC tested up to: 10.5.0
  * Requires Plugins: woocommerce
+ *
+ * @package wc-alcohol
  */
 
-//Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
+// Looking to contribute code to this plugin? Go ahead and fork the repository over at GitHub https://github.com/alexminza/wc-alcohol
 
 if(!defined('ABSPATH')) {
 	exit; // Exit if accessed directly

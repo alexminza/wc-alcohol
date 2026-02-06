@@ -1,11 +1,10 @@
 === Alcohol Sale Restrictions for WooCommerce ===
 Contributors: alexminza
-Donate link: https://www.revolut.me/alexminza
 Tags: WooCommerce, alcohol, sale, time, restriction
 Requires at least: 4.8
-Tested up to: 6.8
-Stable tag: 1.1.3
-Requires PHP: 7.0
+Tested up to: 6.9.1
+Stable tag: 1.2.0
+Requires PHP: 7.2.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

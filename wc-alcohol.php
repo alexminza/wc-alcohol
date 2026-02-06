@@ -148,7 +148,7 @@ if (!class_exists(WC_Alcohol::class)):
                 return false;
             }
 
-            if (!isset($this->restriction_start_value, $this->restriction_end_value) || $this->restriction_start_value == $this->restriction_end_value) {
+            if (!isset($this->restriction_start_value, $this->restriction_end_value) || $this->restriction_start_value === $this->restriction_end_value) {
                 //incorrect restriction hours
                 return false;
             }
@@ -163,13 +163,13 @@ if (!class_exists(WC_Alcohol::class)):
                 array(
                     'page'    => 'wc-settings',
                     'tab'     => 'products',
-                    'section' => self::MOD_SETTINGS_SECTION
+                    'section' => self::MOD_SETTINGS_SECTION,
                 ),
                 admin_url('admin.php')
             );
 
             $plugin_links = array(
-                sprintf('<a href="%1$s">%2$s</a>', esc_url($settings_url), esc_html__('Settings', 'wc-alcohol'))
+                sprintf('<a href="%1$s">%2$s</a>', esc_url($settings_url), esc_html__('Settings', 'wc-alcohol')),
             );
 
             return array_merge($plugin_links, $links);
@@ -200,7 +200,7 @@ if (!class_exists(WC_Alcohol::class)):
                     'type'     => 'checkbox',
                     'name'     => __('Enable restrictions', 'wc-alcohol'),
                     'desc'     => __('Enable sale limitations during restriction hours', 'wc-alcohol'),
-                    'default'  => 'no'
+                    'default'  => 'no',
                 );
 
                 $settings_mod[] = array(
@@ -208,7 +208,7 @@ if (!class_exists(WC_Alcohol::class)):
                     'name'     => __('Restriction time start', 'wc-alcohol'),
                     'desc'     => __('Example: 22:00', 'wc-alcohol'),
                     'type'     => 'text',
-                    'default'  => self::RESTRICTION_START
+                    'default'  => self::RESTRICTION_START,
                 );
 
                 $settings_mod[] = array(
@@ -216,7 +216,7 @@ if (!class_exists(WC_Alcohol::class)):
                     'name'     => __('Restriction time end', 'wc-alcohol'),
                     'desc'     => __('Example: 09:00', 'wc-alcohol'),
                     'type'     => 'text',
-                    'default'  => self::RESTRICTION_END
+                    'default'  => self::RESTRICTION_END,
                 );
 
                 $settings_mod[] = array(
@@ -228,7 +228,7 @@ if (!class_exists(WC_Alcohol::class)):
                     'default'  => self::RESTRICTION_CATEGORY,
                     'custom_attributes' => array(
                         'data-placeholder' => esc_html__('Select restricted categories', 'wc-alcohol'),
-                    )
+                    ),
                 );
 
                 $settings_mod[] = array(
@@ -237,7 +237,7 @@ if (!class_exists(WC_Alcohol::class)):
                     'name'     => __('Warning message', 'wc-alcohol'),
                     'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', 'wc-alcohol'),
                     'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', 'wc-alcohol'),
-                    'default'  => esc_html__('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol')
+                    'default'  => esc_html__('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol'),
                 );
 
                 $settings_mod[] = array(
@@ -246,7 +246,7 @@ if (!class_exists(WC_Alcohol::class)):
                     'title'    => __('Show warning on', 'wc-alcohol'),
                     'desc'     => __('Product pages', 'wc-alcohol'),
                     'default'  => 'yes',
-                    'checkboxgroup' => 'start'
+                    'checkboxgroup' => 'start',
                 );
 
                 $settings_mod[] = array(
@@ -254,12 +254,12 @@ if (!class_exists(WC_Alcohol::class)):
                     'type'     => 'checkbox',
                     'desc'     => __('Category pages', 'wc-alcohol'),
                     'default'  => 'yes',
-                    'checkboxgroup' => 'end'
+                    'checkboxgroup' => 'end',
                 );
 
                 $settings_mod[] = array(
                     'type' => 'sectionend',
-                    'id'   => self::MOD_SETTINGS_SECTION
+                    'id'   => self::MOD_SETTINGS_SECTION,
                 );
 
                 return $settings_mod;

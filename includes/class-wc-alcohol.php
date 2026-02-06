@@ -286,8 +286,8 @@ class WC_Alcohol
 
                 return false;
             }
-        } catch (Exception $ex) {
-            $this->log($ex, WC_Log_Levels::ERROR);
+        } catch (\Exception $ex) {
+            $this->log($ex, \WC_Log_Levels::ERROR);
         }
 
         return true;
@@ -321,8 +321,8 @@ class WC_Alcohol
             if ($this->is_restricted_category($category->slug)) {
                 return false;
             }
-        } catch (Exception $ex) {
-            $this->log($ex, WC_Log_Levels::ERROR);
+        } catch (\Exception $ex) {
+            $this->log($ex, \WC_Log_Levels::ERROR);
         }
 
         return true;
@@ -418,7 +418,7 @@ class WC_Alcohol
         return $warning_message;
     }
 
-    protected function log($message, $level = WC_Log_Levels::DEBUG)
+    protected function log($message, $level = \WC_Log_Levels::DEBUG)
     {
         //https://woocommerce.wordpress.com/2017/01/26/improved-logging-in-woocommerce-2-7/
         //https://stackoverflow.com/questions/1423157/print-php-call-stack

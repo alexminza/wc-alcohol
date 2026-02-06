@@ -418,12 +418,12 @@ class WC_Alcohol
 
         // Ensure we have a valid ID and it's a product context
         if ($product_id && $this->validate_product($product_id, false) === false) {
-             $restricted_category = $this->get_product_restricted_category($product_id);
-             $warning_message = $this->get_warning_message($restricted_category);
+            $restricted_category = $this->get_product_restricted_category($product_id);
+            $warning_message = $this->get_warning_message($restricted_category);
 
-             if (!empty($warning_message)) {
-                 echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
-             }
+            if (!empty($warning_message)) {
+                echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
+            }
         }
     }
 
@@ -438,7 +438,7 @@ class WC_Alcohol
 
         if (is_product_category()) {
             $category = get_queried_object();
-            
+
             if (empty($category) || is_wp_error($category)) {
                 return;
             }

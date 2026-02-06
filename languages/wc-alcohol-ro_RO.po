@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the Alcohol Sale Restrictions for WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Alcohol Sale Restrictions for WooCommerce 1.1.3\n"
+"Project-Id-Version: Products Sale Restrictions for WooCommerce 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-alcohol\n"
-"POT-Creation-Date: 2025-08-11 14:30+0300\n"
-"PO-Revision-Date: 2025-08-11 14:40+0300\n"
+"POT-Creation-Date: 2026-02-06 23:07+0200\n"
+"PO-Revision-Date: 2026-02-06 23:08+0200\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -14,63 +14,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #. Plugin Name of the plugin
 #: wc-alcohol.php
-msgid "Alcohol Sale Restrictions for WooCommerce"
-msgstr "Restricții vânzare alcool pentru WooCommerce"
+msgid "Products Sale Restrictions for WooCommerce"
+msgstr "Restricții vânzare produse pentru WooCommerce"
 
 #. Description of the plugin
-#: wc-alcohol.php wc-alcohol.php:179
-msgid "Alcohol sale limitations during restriction hours"
-msgstr "Limitări de vânzare alcool în timpul orelor de restricție"
+#: wc-alcohol.php includes/class-wc-alcohol.php:170
+msgid "Products sale limitations during restriction hours"
+msgstr "Limitări de vânzare produse în timpul orelor de restricție"
 
-#: wc-alcohol.php:88
-msgid "Alcohol sale restrictions"
-msgstr "Restricții vânzare alcool"
+#: includes/class-wc-alcohol.php:74
+msgid "Products sale restrictions"
+msgstr "Restricții vânzare produse"
 
-#: wc-alcohol.php:158
+#: includes/class-wc-alcohol.php:147
 msgid "Settings"
 msgstr "Setări"
 
-#: wc-alcohol.php:185
+#: includes/class-wc-alcohol.php:176
 msgid "Enable restrictions"
 msgstr "Activează restricții"
 
-#: wc-alcohol.php:186
+#: includes/class-wc-alcohol.php:177
 msgid "Enable sale limitations during restriction hours"
 msgstr "Activează interdicția de vânzare alcool în timpul orelor de restricție"
 
-#: wc-alcohol.php:192
+#: includes/class-wc-alcohol.php:183
 msgid "Restriction time start"
 msgstr "Început restricție"
 
-#: wc-alcohol.php:193
+#: includes/class-wc-alcohol.php:184
 msgid "Example: 22:00"
 msgstr "Exemplu: 22:00"
 
-#: wc-alcohol.php:200
+#: includes/class-wc-alcohol.php:194
 msgid "Restriction time end"
 msgstr "Sfârșit restricție"
 
-#: wc-alcohol.php:201
+#: includes/class-wc-alcohol.php:195
 msgid "Example: 09:00"
 msgstr "Exemplu: 09:00"
 
-#: wc-alcohol.php:208
+#: includes/class-wc-alcohol.php:205
 msgid "Restricted categories"
 msgstr "Categorii restricționate"
 
-#: wc-alcohol.php:214
+#: includes/class-wc-alcohol.php:210
 msgid "Select restricted categories"
 msgstr "Selectează categoriile restricționate"
 
-#: wc-alcohol.php:221
+#: includes/class-wc-alcohol.php:217
 msgid "Warning message"
 msgstr "Mesaj de avertizare"
 
-#: wc-alcohol.php:222
+#: includes/class-wc-alcohol.php:218
 msgid ""
 "Warning message displayed to the customers when trying to purchase products "
 "from the selected categories during restriction hours."
@@ -78,7 +78,7 @@ msgstr ""
 "Mesajul de avertizare afișat clienților la încercarea de a cumpăra produse "
 "din categoriile selectate în intervalul orar restricționat."
 
-#: wc-alcohol.php:223
+#: includes/class-wc-alcohol.php:219
 #, php-format
 msgid ""
 "Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time "
@@ -87,7 +87,7 @@ msgstr ""
 "Format: <code>%1$s</code> - Categorie, <code>%2$s</code> - Început "
 "restricție, <code>%3$s</code> - Sfârșit restricție"
 
-#: wc-alcohol.php:224
+#: includes/class-wc-alcohol.php:220
 #, php-format
 msgid ""
 "The sale of products in the \"%1$s\" category is prohibited from %2$s to "
@@ -96,14 +96,14 @@ msgstr ""
 "Produsele din categoria \"%1$s\" nu pot fi comercializate între orele %2$s - "
 "%3$s."
 
-#: wc-alcohol.php:230
+#: includes/class-wc-alcohol.php:229
 msgid "Show warning on"
 msgstr "Arată avertisment pe"
 
-#: wc-alcohol.php:231
+#: includes/class-wc-alcohol.php:230
 msgid "Product pages"
 msgstr "Pagini produse"
 
-#: wc-alcohol.php:239
+#: includes/class-wc-alcohol.php:238
 msgid "Category pages"
 msgstr "Pagini categorii"

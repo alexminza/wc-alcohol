@@ -55,7 +55,7 @@ class WC_Alcohol
     /**
      * Return an instance of this class.
      *
-     * @return object A single instance of this class.
+     * @return self A single instance of this class.
      */
     public static function get_instance()
     {
@@ -406,7 +406,7 @@ class WC_Alcohol
     }
 
     /**
-     * @global \WC_Product $product
+     * Display a warning message on the single product page if the product is restricted.
      */
     public function single_product_summary()
     {
@@ -428,7 +428,7 @@ class WC_Alcohol
     }
 
     /**
-     * @global \WP_Query $wp_query WordPress Query object.
+     * Display a warning message on the category page if the category is restricted.
      */
     public function archive_description()
     {

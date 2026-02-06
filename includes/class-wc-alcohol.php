@@ -27,7 +27,6 @@ class WC_Alcohol
 
     const RESTRICTION_START    = '22:00';
     const RESTRICTION_END      = '09:00';
-    const RESTRICTION_CATEGORY = '';
     //endregion
 
     /**
@@ -45,7 +44,7 @@ class WC_Alcohol
         $this->enabled               = wc_string_to_bool(get_option(self::MOD_SETTINGS_ENABLED, 'no'));
         $this->restriction_start     = strval(get_option(self::MOD_SETTINGS_RESTRICTION_START, self::RESTRICTION_START));
         $this->restriction_end       = strval(get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END));
-        $this->restricted_categories = get_option(self::MOD_SETTINGS_CATEGORY, self::RESTRICTION_CATEGORY);
+        $this->restricted_categories = (array) get_option(self::MOD_SETTINGS_CATEGORY, array());
         $this->warning_template      = strval(get_option(self::MOD_SETTINGS_WARNING));
         $this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
         $this->warn_category         = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes'));
@@ -201,7 +200,6 @@ class WC_Alcohol
                 'type'     => 'multiselect',
                 'class'    => 'wc-enhanced-select',
                 'options'  => $this->get_categories_list(),
-                'default'  => self::RESTRICTION_CATEGORY,
                 'custom_attributes' => array(
                     'data-placeholder' => esc_html__('Select restricted categories', 'wc-alcohol'),
                 ),

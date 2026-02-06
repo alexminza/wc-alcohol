@@ -25,8 +25,8 @@ class WC_Alcohol
     const MOD_SETTINGS_WARN_PRODUCT      = self::MOD_SETTINGS_PREFIX . 'warn_product';
     const MOD_SETTINGS_WARN_CATEGORY     = self::MOD_SETTINGS_PREFIX . 'warn_category';
 
-    const RESTRICTION_START    = '22:00';
-    const RESTRICTION_END      = '09:00';
+    const DEFAULT_RESTRICTION_START = '22:00';
+    const DEFAULT_RESTRICTION_END   = '09:00';
     //endregion
 
     /**
@@ -42,8 +42,8 @@ class WC_Alcohol
     private function __construct()
     {
         $this->enabled               = wc_string_to_bool(get_option(self::MOD_SETTINGS_ENABLED, 'no'));
-        $this->restriction_start     = strval(get_option(self::MOD_SETTINGS_RESTRICTION_START, self::RESTRICTION_START));
-        $this->restriction_end       = strval(get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END));
+        $this->restriction_start     = strval(get_option(self::MOD_SETTINGS_RESTRICTION_START, self::DEFAULT_RESTRICTION_START));
+        $this->restriction_end       = strval(get_option(self::MOD_SETTINGS_RESTRICTION_END, self::DEFAULT_RESTRICTION_END));
         $this->restricted_categories = (array) get_option(self::MOD_SETTINGS_CATEGORY, array());
         $this->warning_template      = strval(get_option(self::MOD_SETTINGS_WARNING));
         $this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
@@ -183,7 +183,7 @@ class WC_Alcohol
                 'name'     => __('Restriction time start', 'wc-alcohol'),
                 'desc'     => __('Example: 22:00', 'wc-alcohol'),
                 'type'     => 'text',
-                'default'  => self::RESTRICTION_START,
+                'default'  => self::DEFAULT_RESTRICTION_START,
             );
 
             $settings_mod[] = array(
@@ -191,7 +191,7 @@ class WC_Alcohol
                 'name'     => __('Restriction time end', 'wc-alcohol'),
                 'desc'     => __('Example: 09:00', 'wc-alcohol'),
                 'type'     => 'text',
-                'default'  => self::RESTRICTION_END,
+                'default'  => self::DEFAULT_RESTRICTION_END,
             );
 
             $settings_mod[] = array(

@@ -43,10 +43,10 @@ class WC_Alcohol
     private function __construct()
     {
         $this->enabled               = wc_string_to_bool(get_option(self::MOD_SETTINGS_ENABLED, 'no'));
-        $this->restriction_start     = get_option(self::MOD_SETTINGS_RESTRICTION_START, self::RESTRICTION_START);
-        $this->restriction_end       = get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END);
+        $this->restriction_start     = strval(get_option(self::MOD_SETTINGS_RESTRICTION_START, self::RESTRICTION_START));
+        $this->restriction_end       = strval(get_option(self::MOD_SETTINGS_RESTRICTION_END, self::RESTRICTION_END));
         $this->restricted_categories = get_option(self::MOD_SETTINGS_CATEGORY, self::RESTRICTION_CATEGORY);
-        $this->warning_template      = get_option(self::MOD_SETTINGS_WARNING);
+        $this->warning_template      = strval(get_option(self::MOD_SETTINGS_WARNING));
         $this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
         $this->warn_category         = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes'));
 
@@ -74,7 +74,6 @@ class WC_Alcohol
 
         $this->mod_title = esc_html__('Products sale restrictions', 'wc-alcohol');
 
-
         //region Parse restriction times strings
         $restriction_start_string = str_replace(':', '', $this->restriction_start);
         if (is_numeric($restriction_start_string)) {
@@ -98,7 +97,7 @@ class WC_Alcohol
         }
 
         if ($this->enabled) {
-            add_filter('woocommerce_add_to_cart_validation', array($this, 'validate_add_to_cart'), 10, 3);
+            add_filter('woocommerce_add_to_cart_validation', array($this, 'validate_add_to_cart'), 10, 2);
             add_action('woocommerce_check_cart_items', array($this, 'check_cart_items'));
             add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 10, 2);
 
@@ -116,17 +115,17 @@ class WC_Alcohol
     protected function validate_settings()
     {
         if (empty($this->restricted_categories)) {
-            //missing restriction categories definition
+            // Missing restriction categories definition
             return false;
         }
 
         if (empty($this->restriction_start) || empty($this->restriction_end)) {
-            //missing restriction hours
+            // Missing restriction hours
             return false;
         }
 
         if (!isset($this->restriction_start_value, $this->restriction_end_value) || $this->restriction_start_value === $this->restriction_end_value) {
-            //incorrect restriction hours
+            // Incorrect restriction hours
             return false;
         }
 
@@ -265,7 +264,7 @@ class WC_Alcohol
     }
     //endregion
 
-    protected function validate_product($product_id, $notify = true)
+    protected function validate_product(int $product_id, bool $notify = true)
     {
         try {
             if ($this->validate()) {
@@ -285,13 +284,22 @@ class WC_Alcohol
                 return false;
             }
         } catch (\Exception $ex) {
-            $this->log($ex, \WC_Log_Levels::ERROR);
+            $this->log(
+                $ex->getMessage(),
+                \WC_Log_Levels::ERROR,
+                array(
+                    'product_id' => $product_id,
+                    'notify' => $notify,
+                    'exception' => (string) $ex,
+                    'backtrace' => true,
+                )
+            );
         }
 
         return true;
     }
 
-    protected function get_product_restricted_category($product_id)
+    protected function get_product_restricted_category(int $product_id)
     {
         //https://developer.wordpress.org/reference/functions/get_the_terms/
         $categories = get_the_terms($product_id, 'product_cat');
@@ -309,7 +317,7 @@ class WC_Alcohol
         return null;
     }
 
-    protected function validate_category($category)
+    protected function validate_category(\WP_Term $category)
     {
         try {
             if ($this->validate()) {
@@ -320,7 +328,15 @@ class WC_Alcohol
                 return false;
             }
         } catch (\Exception $ex) {
-            $this->log($ex, \WC_Log_Levels::ERROR);
+            $this->log(
+                $ex->getMessage(),
+                \WC_Log_Levels::ERROR,
+                array(
+                    'category' => $category,
+                    'exception' => (string) $ex,
+                    'backtrace' => true,
+                )
+            );
         }
 
         return true;
@@ -349,7 +365,7 @@ class WC_Alcohol
     }
 
     //region WooCommerce hooks
-    public function is_purchasable($is_purchasable, $product)
+    public function is_purchasable(bool $is_purchasable, \WC_Product $product)
     {
         if (!$this->validate_product($product->get_id(), false)) {
             $is_purchasable = false;
@@ -358,11 +374,12 @@ class WC_Alcohol
         return $is_purchasable;
     }
 
-    public function validate_add_to_cart($passed, $product_id, $quantity)
+    public function validate_add_to_cart(bool $passed, int $product_id)
     {
         if (!$this->validate_product($product_id, true)) {
             $passed = false;
         }
+
         return $passed;
     }
 
@@ -373,32 +390,43 @@ class WC_Alcohol
         }
 
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-            $product_id = $cart_item['product_id'];
+            $product_id = intval($cart_item['product_id']);
+
             if (!$this->validate_product($product_id, true)) {
                 WC()->cart->remove_cart_item($cart_item_key);
             }
         }
     }
 
+    /**
+     * @global \WC_Product $product
+     */
     public function single_product_summary()
     {
         if (!$this->warn_product) {
             return;
         }
 
+        /** @var \WC_Product $product */
         global $product;
-        $product_id = $product->get_id();
 
-        if (!$this->validate_product($product_id, false)) {
-            $restricted_category = $this->get_product_restricted_category($product_id);
-            $warning_message = $this->get_warning_message($restricted_category);
+        if ($product && is_a($product, 'WC_Product')) {
+            $product_id = $product->get_id();
 
-            if (!empty($warning_message)) {
-                echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
+            if (!$this->validate_product($product_id, false)) {
+                $restricted_category = $this->get_product_restricted_category($product_id);
+                $warning_message = $this->get_warning_message($restricted_category);
+
+                if (!empty($warning_message)) {
+                    echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
+                }
             }
         }
     }
 
+    /**
+     * @global \WP_Query $wp_query WordPress Query object.
+     */
     public function archive_description()
     {
         if (!$this->warn_category) {
@@ -406,9 +434,10 @@ class WC_Alcohol
         }
 
         if (is_product_category()) {
+            /** @var \WP_Query $wp_query */
             global $wp_query;
-            $category = $wp_query->get_queried_object();
 
+            $category = $wp_query->get_queried_object();
             if (empty($category) || is_wp_error($category)) {
                 return;
             }
@@ -425,18 +454,19 @@ class WC_Alcohol
     }
     //endregion
 
+    //region Utility
     protected function get_categories_list()
     {
         $categories = $this->get_product_categories();
         return wp_list_pluck($categories, 'name', 'slug');
     }
 
-    protected function is_restricted_category($category_slug)
+    protected function is_restricted_category(string $category_slug)
     {
         return in_array($category_slug, $this->restricted_categories, true);
     }
 
-    protected function get_warning_message($category_slug)
+    protected function get_warning_message(string $category_slug)
     {
         $term = get_term_by('slug', $category_slug, 'product_cat');
         $category_name = $term ? $term->name : $category_slug;
@@ -446,12 +476,17 @@ class WC_Alcohol
         return $warning_message;
     }
 
-    protected function log($message, $level = \WC_Log_Levels::DEBUG)
+    protected function log(string $message, string $level = \WC_Log_Levels::DEBUG, ?array $additional_context = null)
     {
-        //https://woocommerce.wordpress.com/2017/01/26/improved-logging-in-woocommerce-2-7/
-        //https://stackoverflow.com/questions/1423157/print-php-call-stack
+        // https://developer.woocommerce.com/docs/best-practices/data-management/logging/
+        // https://stackoverflow.com/questions/1423157/print-php-call-stack
         $logger = wc_get_logger();
         $log_context = array('source' => self::MOD_ID);
+        if (!empty($additional_context)) {
+            $log_context = array_merge($log_context, $additional_context);
+        }
+
         $logger->log($level, $message, $log_context);
     }
+    //endregion
 }

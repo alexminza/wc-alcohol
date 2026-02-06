@@ -37,7 +37,7 @@ class WC_Alcohol
      */
     protected static $instance = null;
 
-    protected $enabled, $mod_title, $categories_list, $restriction_start, $restriction_end, $restriction_start_value, $restriction_end_value;
+    protected $enabled, $mod_title, $restriction_start, $restriction_end, $restriction_start_value, $restriction_end_value;
     protected $restricted_categories, $warning_template, $warn_product, $warn_category;
 
     private function __construct()
@@ -74,10 +74,6 @@ class WC_Alcohol
 
         $this->mod_title = esc_html__('Alcohol sale restrictions', 'wc-alcohol');
 
-        //region Init categories
-        $categories = $this->get_product_categories();
-        $this->categories_list = wp_list_pluck($categories, 'name', 'slug');
-        //endregion
 
         //region Parse restriction times strings
         $restriction_start_string = str_replace(':', '', $this->restriction_start);
@@ -203,7 +199,7 @@ class WC_Alcohol
                 'name'     => __('Restricted categories', 'wc-alcohol'),
                 'type'     => 'multiselect',
                 'class'    => 'wc-enhanced-select',
-                'options'  => $this->categories_list,
+                'options'  => $this->get_categories_list(),
                 'default'  => self::RESTRICTION_CATEGORY,
                 'custom_attributes' => array(
                     'data-placeholder' => esc_html__('Select restricted categories', 'wc-alcohol'),
@@ -405,6 +401,12 @@ class WC_Alcohol
     }
     //endregion
 
+    protected function get_categories_list()
+    {
+        $categories = $this->get_product_categories();
+        return wp_list_pluck($categories, 'name', 'slug');
+    }
+
     protected function is_restricted_category($category_slug)
     {
         return in_array($category_slug, $this->restricted_categories, true);
@@ -412,7 +414,9 @@ class WC_Alcohol
 
     protected function get_warning_message($category_slug)
     {
-        $category_name = $this->categories_list[$category_slug];
+        $term = get_term_by('slug', $category_slug, 'product_cat');
+        $category_name = $term ? $term->name : $category_slug;
+
         $warning_message = do_shortcode(wp_kses_post(sprintf($this->warning_template, $category_name, $this->restriction_start, $this->restriction_end)));
 
         return $warning_message;

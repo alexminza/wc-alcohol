@@ -69,8 +69,6 @@ class WC_Alcohol
 
     public function init()
     {
-        load_plugin_textdomain('wc-alcohol', false, dirname(plugin_basename(__FILE__)) . '/languages');
-
         $this->mod_title = esc_html__('Products sale restrictions', 'wc-alcohol');
 
         //region Parse restriction times strings

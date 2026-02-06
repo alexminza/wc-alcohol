@@ -279,7 +279,6 @@ class WC_Alcohol
             }
 
             $restricted_category = $this->get_product_restricted_category($product_id);
-
             if (!empty($restricted_category)) {
                 if ($notify) {
                     $warning_message = $this->get_warning_message($restricted_category);
@@ -303,6 +302,7 @@ class WC_Alcohol
             );
         }
 
+        // Fail-open on exception
         return true;
     }
 

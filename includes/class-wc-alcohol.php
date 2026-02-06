@@ -152,14 +152,14 @@ class WC_Alcohol
 
     public function get_sections_products($sections)
     {
-        //https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
+        // https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
         $sections[self::MOD_SETTINGS_SECTION] = $this->mod_title;
         return $sections;
     }
 
     public function get_settings_products($settings, $current_section)
     {
-        //https://github.com/woocommerce/woocommerce/blob/master/includes/admin/settings/class-wc-settings-products.php
+        // https://github.com/woocommerce/woocommerce/blob/master/includes/admin/settings/class-wc-settings-products.php
         if (self::MOD_SETTINGS_SECTION === $current_section) {
             $settings_mod = array();
 
@@ -184,6 +184,9 @@ class WC_Alcohol
                 'desc'     => __('Example: 22:00', 'wc-alcohol'),
                 'type'     => 'text',
                 'default'  => self::DEFAULT_RESTRICTION_START,
+                'custom_attributes' => array(
+                    'required' => 'required',
+                ),
             );
 
             $settings_mod[] = array(
@@ -192,6 +195,9 @@ class WC_Alcohol
                 'desc'     => __('Example: 09:00', 'wc-alcohol'),
                 'type'     => 'text',
                 'default'  => self::DEFAULT_RESTRICTION_END,
+                'custom_attributes' => array(
+                    'required' => 'required',
+                ),
             );
 
             $settings_mod[] = array(
@@ -212,6 +218,9 @@ class WC_Alcohol
                 'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', 'wc-alcohol'),
                 'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', 'wc-alcohol'),
                 'default'  => esc_html__('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol'),
+                'custom_attributes' => array(
+                    'required' => 'required',
+                ),
             );
 
             $settings_mod[] = array(
@@ -251,7 +260,7 @@ class WC_Alcohol
             'hide_empty'   => 0,
         );
 
-        //https://developer.wordpress.org/reference/functions/get_categories/
+        // https://developer.wordpress.org/reference/functions/get_categories/
         $categories = get_categories($args);
 
         if (empty($categories) || is_wp_error($categories)) {
@@ -299,7 +308,7 @@ class WC_Alcohol
 
     protected function get_product_restricted_category(int $product_id)
     {
-        //https://developer.wordpress.org/reference/functions/get_the_terms/
+        // https://developer.wordpress.org/reference/functions/get_the_terms/
         $categories = get_the_terms($product_id, 'product_cat');
 
         if (empty($categories) || is_wp_error($categories)) {
@@ -354,7 +363,7 @@ class WC_Alcohol
             }
         }
 
-        // Intraday restrction
+        // Intraday restriction
         if ($current_hour < $this->restriction_start_value || $current_hour >= $this->restriction_end_value) {
             return true;
         }

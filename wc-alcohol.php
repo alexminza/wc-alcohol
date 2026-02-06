@@ -143,7 +143,7 @@ if (!class_exists(WC_Alcohol::class)):
                 return false;
             }
 
-            if (self::string_empty($this->restriction_start) || self::string_empty($this->restriction_end)) {
+            if (empty($this->restriction_start) || empty($this->restriction_end)) {
                 //missing restriction hours
                 return false;
             }
@@ -297,10 +297,10 @@ if (!class_exists(WC_Alcohol::class)):
 
                 $restricted_category = $this->get_product_restricted_category($product_id);
 
-                if (!self::string_empty($restricted_category)) {
+                if (!empty($restricted_category)) {
                     if ($notify) {
                         $warning_message = $this->get_warning_message($restricted_category);
-                        if (!self::string_empty($warning_message)) {
+                        if (!empty($warning_message)) {
                             wc_add_notice($warning_message, 'error');
                         }
                     }
@@ -394,7 +394,7 @@ if (!class_exists(WC_Alcohol::class)):
                 $restricted_category = $this->get_product_restricted_category($product_id);
                 $warning_message = $this->get_warning_message($restricted_category);
 
-                if (!self::string_empty($warning_message)) {
+                if (!empty($warning_message)) {
                     echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
                 }
             }
@@ -417,7 +417,7 @@ if (!class_exists(WC_Alcohol::class)):
                 if (!$this->validate_category($category)) {
                     $warning_message = $this->get_warning_message($category->slug);
 
-                    if (!self::string_empty($warning_message)) {
+                    if (!empty($warning_message)) {
                         echo wp_kses_post(sprintf('<div class="term-description">%1$s</div>', wc_format_content($warning_message)));
                         // wc_add_notice($warning_message, 'error');
                     }
@@ -446,11 +446,6 @@ if (!class_exists(WC_Alcohol::class)):
             $logger = wc_get_logger();
             $log_context = array('source' => self::MOD_ID);
             $logger->log($level, $message, $log_context);
-        }
-
-        protected static function string_empty($string)
-        {
-            return is_null($string) || strlen($string) === 0;
         }
     }
 

@@ -317,7 +317,7 @@ class WC_Alcohol
 
         foreach ($categories as $category) {
             if ($this->is_restricted_category($category->slug)) {
-                return $category->slug; //return first found restricted product category
+                return $category->slug; // Return first found restricted product category
             }
         }
 
@@ -415,10 +415,12 @@ class WC_Alcohol
         }
 
         $product_id = get_the_ID();
+        if (empty($product_id) || $this->validate()) {
+            return;
+        }
 
-        // Ensure we have a valid ID and it's a product context
-        if ($product_id && $this->validate_product($product_id, false) === false) {
-            $restricted_category = $this->get_product_restricted_category($product_id);
+        $restricted_category = $this->get_product_restricted_category($product_id);
+        if (!empty($restricted_category)) {
             $warning_message = $this->get_warning_message($restricted_category);
 
             if (!empty($warning_message)) {

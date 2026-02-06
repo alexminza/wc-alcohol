@@ -353,23 +353,20 @@ class WC_Alcohol
     protected function validate()
     {
         if (!$this->enabled) {
-            return true;
+            return true; // Not restricted.
         }
 
         $current_hour = intval(current_time('Hi'));
+
+        // Overnight restriction (e.g., 22:00 - 09:00).
         if ($this->restriction_start_value > $this->restriction_end_value) {
-            // Overnight restriction
-            if ($current_hour < $this->restriction_start_value && $current_hour >= $this->restriction_end_value) {
-                return true;
-            }
+            // Allowed if the current time is between the end and start time.
+            return $current_hour >= $this->restriction_end_value && $current_hour < $this->restriction_start_value;
         }
 
-        // Intraday restriction
-        if ($current_hour < $this->restriction_start_value || $current_hour >= $this->restriction_end_value) {
-            return true;
-        }
-
-        return false;
+        // Intraday restriction (e.g., 09:00 - 17:00).
+        // Allowed if the current time is outside the start and end time.
+        return $current_hour < $this->restriction_start_value || $current_hour >= $this->restriction_end_value;
     }
 
     //region WooCommerce hooks

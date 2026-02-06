@@ -180,7 +180,7 @@ class WC_Alcohol
                 'id'       => self::MOD_SETTINGS_RESTRICTION_START,
                 'name'     => __('Restriction time start', 'wc-alcohol'),
                 'desc'     => __('Example: 22:00', 'wc-alcohol'),
-                'type'     => 'text',
+                'type'     => 'time',
                 'default'  => self::DEFAULT_RESTRICTION_START,
                 'custom_attributes' => array(
                     'required' => 'required',
@@ -191,7 +191,7 @@ class WC_Alcohol
                 'id'       => self::MOD_SETTINGS_RESTRICTION_END,
                 'name'     => __('Restriction time end', 'wc-alcohol'),
                 'desc'     => __('Example: 09:00', 'wc-alcohol'),
-                'type'     => 'text',
+                'type'     => 'time',
                 'default'  => self::DEFAULT_RESTRICTION_END,
                 'custom_attributes' => array(
                     'required' => 'required',

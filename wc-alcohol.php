@@ -32,8 +32,8 @@ if (!defined('ABSPATH')) {
 if (!class_exists(WC_Alcohol::class)):
     class WC_Alcohol
     {
-        #region Constants
-        const MOD_ID          = 'wc-alcohol';
+        //region Constants
+        const MOD_ID = 'wc-alcohol';
 
         const MOD_SETTINGS_SECTION           = self::MOD_ID;
         const MOD_SETTINGS_PREFIX            = self::MOD_SETTINGS_SECTION . '_';
@@ -48,7 +48,7 @@ if (!class_exists(WC_Alcohol::class)):
         const RESTRICTION_START    = '22:00';
         const RESTRICTION_END      = '09:00';
         const RESTRICTION_CATEGORY = '';
-        #endregion
+        //endregion
 
         /**
          * Instance of this class.
@@ -82,7 +82,7 @@ if (!class_exists(WC_Alcohol::class)):
         {
             // If the single instance hasn't been set, set it now.
             if (null === self::$instance) {
-                self::$instance = new self;
+                self::$instance = new self();
             }
 
             return self::$instance;
@@ -94,25 +94,28 @@ if (!class_exists(WC_Alcohol::class)):
 
             $this->mod_title = esc_html__('Alcohol sale restrictions', 'wc-alcohol');
 
-            #region Init categories
+            //region Init categories
             $categories = $this->get_product_categories();
             $this->categories_list = wp_list_pluck($categories, 'name', 'slug');
-            #endregion
+            //endregion
 
-            #region Parse restriction times strings
+            //region Parse restriction times strings
             $restriction_start_string = str_replace(':', '', $this->restriction_start);
-            if (is_numeric($restriction_start_string))
+            if (is_numeric($restriction_start_string)) {
                 $this->restriction_start_value = intval($restriction_start_string);
+            }
 
             $restriction_end_string = str_replace(':', '', $this->restriction_end);
-            if (is_numeric($restriction_end_string))
+            if (is_numeric($restriction_end_string)) {
                 $this->restriction_end_value = intval($restriction_end_string);
-            #endregion
+            }
+            //endregion
 
-            if (!$this->validate_settings())
+            if (!$this->validate_settings()) {
                 $this->enabled = false;
+            }
 
-            #region Add WooCommerce hooks
+            //region Add WooCommerce hooks
             if (is_admin()) {
                 add_filter('woocommerce_get_sections_products', array($this, 'get_sections_products'));
                 add_filter('woocommerce_get_settings_products', array($this, 'get_settings_products'), 10, 2);
@@ -122,13 +125,15 @@ if (!class_exists(WC_Alcohol::class)):
             if ($this->enabled) {
                 add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 10, 2);
 
-                if ($this->warn_product)
+                if ($this->warn_product) {
                     add_action('woocommerce_single_product_summary', array($this, 'single_product_summary'), 20);
+                }
 
-                if ($this->warn_category)
+                if ($this->warn_category) {
                     add_action('woocommerce_archive_description', array($this, 'archive_description'), 10);
+                }
             }
-            #endregion
+            //endregion
         }
 
         protected function validate_settings()
@@ -151,7 +156,7 @@ if (!class_exists(WC_Alcohol::class)):
             return true;
         }
 
-        #region Plugin settings
+        //region Plugin settings
         public function plugin_links($links)
         {
             $settings_url = add_query_arg(
@@ -180,7 +185,7 @@ if (!class_exists(WC_Alcohol::class)):
         public function get_settings_products($settings, $current_section)
         {
             //https://github.com/woocommerce/woocommerce/blob/master/includes/admin/settings/class-wc-settings-products.php
-            if ($current_section == self::MOD_SETTINGS_SECTION) {
+            if (self::MOD_SETTINGS_SECTION === $current_section) {
                 $settings_mod = array();
 
                 $settings_mod[] = array(
@@ -269,32 +274,35 @@ if (!class_exists(WC_Alcohol::class)):
                 'type'         => 'product',
                 'taxonomy'     => 'product_cat',
                 'hierarchical' => true,
-                'hide_empty'   => 0
+                'hide_empty'   => 0,
             );
 
             //https://developer.wordpress.org/reference/functions/get_categories/
             $categories = get_categories($args);
 
-            if (empty($categories) || is_wp_error($categories))
+            if (empty($categories) || is_wp_error($categories)) {
                 return array();
+            }
 
             return $categories;
         }
-        #endregion
+        //endregion
 
         protected function validate_product($product_id, $notify = true)
         {
             try {
-                if ($this->validate())
+                if ($this->validate()) {
                     return true;
+                }
 
                 $restricted_category = $this->get_product_restricted_category($product_id);
 
                 if (!self::string_empty($restricted_category)) {
                     if ($notify) {
                         $warning_message = $this->get_warning_message($restricted_category);
-                        if (!self::string_empty($warning_message))
+                        if (!self::string_empty($warning_message)) {
                             wc_add_notice($warning_message, 'error');
+                        }
                     }
 
                     return false;
@@ -311,12 +319,14 @@ if (!class_exists(WC_Alcohol::class)):
             //https://developer.wordpress.org/reference/functions/get_the_terms/
             $categories = get_the_terms($product_id, 'product_cat');
 
-            if (empty($categories) || is_wp_error($categories))
+            if (empty($categories) || is_wp_error($categories)) {
                 return null;
+            }
 
             foreach ($categories as $category) {
-                if ($this->is_restricted_category($category->slug))
+                if ($this->is_restricted_category($category->slug)) {
                     return $category->slug; //return first found restricted product category
+                }
             }
 
             return null;
@@ -325,11 +335,13 @@ if (!class_exists(WC_Alcohol::class)):
         protected function validate_category($category)
         {
             try {
-                if ($this->validate())
+                if ($this->validate()) {
                     return true;
+                }
 
-                if ($this->is_restricted_category($category->slug))
+                if ($this->is_restricted_category($category->slug)) {
                     return false;
+                }
             } catch (Exception $ex) {
                 $this->log($ex, WC_Log_Levels::ERROR);
             }
@@ -339,36 +351,41 @@ if (!class_exists(WC_Alcohol::class)):
 
         protected function validate()
         {
-            if (!$this->enabled)
+            if (!$this->enabled) {
                 return true;
+            }
 
             $current_hour = intval(current_time('Hi'));
             if ($this->restriction_start_value > $this->restriction_end_value) {
-                //overnight restriction
-                if ($current_hour < $this->restriction_start_value && $current_hour >= $this->restriction_end_value)
+                // Overnight restriction
+                if ($current_hour < $this->restriction_start_value && $current_hour >= $this->restriction_end_value) {
                     return true;
-            } else {
-                //intraday restrction
-                if ($current_hour < $this->restriction_start_value || $current_hour >= $this->restriction_end_value)
-                    return true;
+                }
+            }
+
+            // Intraday restrction
+            if ($current_hour < $this->restriction_start_value || $current_hour >= $this->restriction_end_value) {
+                return true;
             }
 
             return false;
         }
 
-        #region WooCommerce hooks
-        public function is_purchasable($is_purchasable, $object)
+        //region WooCommerce hooks
+        public function is_purchasable($is_purchasable, $product)
         {
-            if (!$this->validate_product($object->get_id(), false))
+            if (!$this->validate_product($product->get_id(), false)) {
                 $is_purchasable = false;
+            }
 
             return $is_purchasable;
         }
 
         public function single_product_summary()
         {
-            if (!$this->warn_product)
+            if (!$this->warn_product) {
                 return;
+            }
 
             global $product;
             $product_id = $product->get_id();
@@ -376,32 +393,38 @@ if (!class_exists(WC_Alcohol::class)):
             if (!$this->validate_product($product_id, false)) {
                 $restricted_category = $this->get_product_restricted_category($product_id);
                 $warning_message = $this->get_warning_message($restricted_category);
-                echo sprintf('<p class="stock out-of-stock">%1$s</p>', $warning_message);
+
+                if (!self::string_empty($warning_message)) {
+                    echo wp_kses_post(sprintf('<p class="stock out-of-stock">%1$s</p>', wc_format_content($warning_message)));
+                }
             }
         }
 
         public function archive_description()
         {
-            if (!$this->warn_category)
+            if (!$this->warn_category) {
                 return;
+            }
 
             if (is_product_category()) {
                 global $wp_query;
                 $category = $wp_query->get_queried_object();
 
-                if (empty($category) || is_wp_error($category))
+                if (empty($category) || is_wp_error($category)) {
                     return;
+                }
 
                 if (!$this->validate_category($category)) {
                     $warning_message = $this->get_warning_message($category->slug);
+
                     if (!self::string_empty($warning_message)) {
-                        echo sprintf('<div class="term-description">%1$s</div>', wc_format_content($warning_message));
-                        //wc_add_notice($warning_message, 'error');
+                        echo wp_kses_post(sprintf('<div class="term-description">%1$s</div>', wc_format_content($warning_message)));
+                        // wc_add_notice($warning_message, 'error');
                     }
                 }
             }
         }
-        #endregion
+        //endregion
 
         protected function is_restricted_category($category_slug)
         {
@@ -437,11 +460,11 @@ if (!class_exists(WC_Alcohol::class)):
     }
 endif;
 
-#region WooCommerce HPOS compatibility
+//region WooCommerce HPOS compatibility
 //https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
 add_action('before_woocommerce_init', function () {
     if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
     }
 });
-#endregion
+//endregion

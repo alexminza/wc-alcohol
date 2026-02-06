@@ -42,6 +42,10 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
 
+= 1.2.0 =
+* Code reorganization and refactoring for better maintainability
+* Added WooCommerce compatibility declarations for Cart/Checkout blocks and product instance caching
+
 = 1.1.3 =
 Adjusted plugin name to comply with the [WooCommerce trademark guidelines](https://woocommerce.com/trademark-guidelines/).
 
@@ -82,6 +86,9 @@ Display warning options on product and category pages.
 Initial release.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Code reorganization and refactoring for better maintainability.
 
 = 1.1.3 =
 Adjusted plugin name to comply with the [WooCommerce trademark guidelines](https://woocommerce.com/trademark-guidelines/).

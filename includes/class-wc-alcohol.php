@@ -346,6 +346,7 @@ class WC_Alcohol
             );
         }
 
+        // Fail-open on exception
         return true;
     }
 

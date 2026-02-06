@@ -1,6 +1,6 @@
-=== Alcohol Sale Restrictions for WooCommerce ===
+=== Products Sale Restrictions for WooCommerce ===
 Contributors: alexminza
-Tags: WooCommerce, alcohol, sale, time, restriction
+Tags: WooCommerce, products, sale, time, restriction
 Requires at least: 4.8
 Tested up to: 6.9.1
 Stable tag: 1.2.0
@@ -10,7 +10,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-Alcohol sale limitations during legal restriction hours
+Products sale limitations during legal restriction hours
 
 = Features =
 
@@ -24,7 +24,7 @@ Alcohol sale limitations during legal restriction hours
 
 = How can I configure the plugin settings? =
 
-Use the *WooCommerce > Settings > Products > Alcohol sale restrictions* screen to configure the plugin.
+Use the *WooCommerce > Settings > Products > Products sale restrictions* screen to configure the plugin.
 
 = How can I contribute to the plugin? =
 

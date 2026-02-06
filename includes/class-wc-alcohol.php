@@ -72,7 +72,7 @@ class WC_Alcohol
     {
         load_plugin_textdomain('wc-alcohol', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
-        $this->mod_title = esc_html__('Alcohol sale restrictions', 'wc-alcohol');
+        $this->mod_title = esc_html__('Products sale restrictions', 'wc-alcohol');
 
 
         //region Parse restriction times strings
@@ -98,6 +98,8 @@ class WC_Alcohol
         }
 
         if ($this->enabled) {
+            add_filter('woocommerce_add_to_cart_validation', array($this, 'validate_add_to_cart'), 10, 3);
+            add_action('woocommerce_check_cart_items', array($this, 'check_cart_items'));
             add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 10, 2);
 
             if ($this->warn_product) {
@@ -167,7 +169,7 @@ class WC_Alcohol
                 'id'   => self::MOD_SETTINGS_SECTION,
                 'name' => $this->mod_title,
                 'type' => 'title',
-                'desc' => __('Alcohol sale limitations during restriction hours', 'wc-alcohol'),
+                'desc' => __('Products sale limitations during restriction hours', 'wc-alcohol'),
             );
 
             $settings_mod[] = array(
@@ -354,6 +356,28 @@ class WC_Alcohol
         }
 
         return $is_purchasable;
+    }
+
+    public function validate_add_to_cart($passed, $product_id, $quantity)
+    {
+        if (!$this->validate_product($product_id, true)) {
+            $passed = false;
+        }
+        return $passed;
+    }
+
+    public function check_cart_items()
+    {
+        if (WC()->cart->is_empty()) {
+            return;
+        }
+
+        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+            $product_id = $cart_item['product_id'];
+            if (!$this->validate_product($product_id, true)) {
+                WC()->cart->remove_cart_item($cart_item_key);
+            }
+        }
     }
 
     public function single_product_summary()

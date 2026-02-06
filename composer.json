@@ -1,10 +1,10 @@
 {
     "name": "alexminza/wc-alcohol",
-    "description": "Alcohol Sale Restrictions for WooCommerce",
+    "description": "Products Sale Restrictions for WooCommerce",
     "type": "wordpress-plugin",
     "keywords": [
         "WooCommerce",
-        "alcohol",
+        "products",
         "sale",
         "time",
         "restriction"

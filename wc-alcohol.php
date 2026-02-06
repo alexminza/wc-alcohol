@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name: Alcohol Sale Restrictions for WooCommerce
- * Description: Alcohol sale limitations during restriction hours
+ * Plugin Name: Products Sale Restrictions for WooCommerce
+ * Description: Products sale limitations during restriction hours
  * Plugin URI: https://wordpress.org/plugins/wc-alcohol/
  * Version: 1.2.0
  * Author: Alexander Minza

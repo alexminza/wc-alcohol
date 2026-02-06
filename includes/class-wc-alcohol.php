@@ -69,7 +69,7 @@ class WC_Alcohol
 
     public function init()
     {
-        $this->mod_title = esc_html__('Products sale restrictions', 'wc-alcohol');
+        $this->mod_title = __('Products sale restrictions', 'wc-alcohol');
 
         //region Parse restriction times strings
         $restriction_start_string = str_replace(':', '', $this->restriction_start);
@@ -205,7 +205,7 @@ class WC_Alcohol
                 'class'    => 'wc-enhanced-select',
                 'options'  => $this->get_categories_list(),
                 'custom_attributes' => array(
-                    'data-placeholder' => esc_html__('Select restricted categories', 'wc-alcohol'),
+                    'data-placeholder' => __('Select restricted categories', 'wc-alcohol'),
                 ),
             );
 
@@ -217,7 +217,7 @@ class WC_Alcohol
                 /* translators: 1: Category name placeholder, 2: Restriction start time placeholder, 2: Restriction end time placeholder  */
                 'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', 'wc-alcohol'),
                 /* translators: 1: Category name placeholder, 2: Restriction start time placeholder, 2: Restriction end time placeholder  */
-                'default'  => esc_html__('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol'),
+                'default'  => __('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol'),
                 'custom_attributes' => array(
                     'required' => 'required',
                 ),

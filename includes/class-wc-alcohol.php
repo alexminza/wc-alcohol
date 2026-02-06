@@ -470,12 +470,24 @@ class WC_Alcohol
 
     protected function get_warning_message(string $category_slug)
     {
-        $term = get_term_by('slug', $category_slug, 'product_cat');
-        $category_name = $term ? $term->name : $category_slug;
+        try {
+            $term = get_term_by('slug', $category_slug, 'product_cat');
+            $category_name = $term ? $term->name : $category_slug;
 
-        $warning_message = do_shortcode(wp_kses_post(sprintf($this->warning_template, $category_name, $this->restriction_start, $this->restriction_end)));
+            return do_shortcode(sprintf($this->warning_template, $category_name, $this->restriction_start, $this->restriction_end));
+        } catch (\Exception $ex) {
+            $this->log(
+                $ex->getMessage(),
+                \WC_Log_Levels::ERROR,
+                array(
+                    'category_slug' => $category_slug,
+                    'exception' => (string) $ex,
+                    'backtrace' => true,
+                )
+            );
+        }
 
-        return $warning_message;
+        return null;
     }
 
     protected function log(string $message, string $level = \WC_Log_Levels::DEBUG, ?array $additional_context = null)

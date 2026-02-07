@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Products Sale Restrictions for WooCommerce 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-alcohol\n"
-"POT-Creation-Date: 2026-02-07 11:01+0200\n"
-"PO-Revision-Date: 2026-02-07 11:01+0200\n"
+"POT-Creation-Date: 2026-02-07 11:53+0200\n"
+"PO-Revision-Date: 2026-02-07 11:53+0200\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -22,64 +22,64 @@ msgid "Products Sale Restrictions for WooCommerce"
 msgstr "Restricții vânzare produse pentru WooCommerce"
 
 #. Description of the plugin
-#: wc-alcohol.php includes/class-wc-alcohol.php:171
+#: wc-alcohol.php includes/class-wc-alcohol.php:172
 msgid "Products sale limitations during restriction hours."
 msgstr "Limitări de vânzare produse în timpul orelor de restricție."
 
-#: includes/class-wc-alcohol.php:75
+#: includes/class-wc-alcohol.php:76
 msgid "Products sale restrictions"
 msgstr "Restricții vânzare produse"
 
-#: includes/class-wc-alcohol.php:148
+#: includes/class-wc-alcohol.php:149
 msgid "Settings"
 msgstr "Setări"
 
-#: includes/class-wc-alcohol.php:177
+#: includes/class-wc-alcohol.php:178
 msgid "Enable restrictions"
 msgstr "Activează restricții"
 
-#: includes/class-wc-alcohol.php:178
+#: includes/class-wc-alcohol.php:179
 msgid "Enable sale limitations during restriction hours"
 msgstr ""
 "Activează interdicția de vânzare produse în timpul orelor de restricție"
 
-#: includes/class-wc-alcohol.php:184
+#: includes/class-wc-alcohol.php:185
 msgid "Restriction time start"
 msgstr "Început restricție"
 
-#: includes/class-wc-alcohol.php:185
+#: includes/class-wc-alcohol.php:186
 msgid "Example: 22:00"
 msgstr "Exemplu: 22:00"
 
-#: includes/class-wc-alcohol.php:195
+#: includes/class-wc-alcohol.php:196
 msgid "Restriction time end"
 msgstr "Sfârșit restricție"
 
-#: includes/class-wc-alcohol.php:196
+#: includes/class-wc-alcohol.php:197
 msgid "Example: 09:00"
 msgstr "Exemplu: 09:00"
 
-#: includes/class-wc-alcohol.php:206
+#: includes/class-wc-alcohol.php:207
 msgid "Restricted categories"
 msgstr "Categorii restricționate"
 
-#: includes/class-wc-alcohol.php:211
+#: includes/class-wc-alcohol.php:212
 msgid "Select restricted categories"
 msgstr "Selectează categoriile restricționate"
 
-#: includes/class-wc-alcohol.php:217
+#: includes/class-wc-alcohol.php:218
 msgid "Hierarchical restriction"
 msgstr "Restricție ierarhică"
 
-#: includes/class-wc-alcohol.php:218
+#: includes/class-wc-alcohol.php:219
 msgid "Subcategories will inherit restrictions from their parent category."
 msgstr "Subcategoriile vor moșteni restricții de la categoria părinte."
 
-#: includes/class-wc-alcohol.php:226
+#: includes/class-wc-alcohol.php:227
 msgid "Warning message"
 msgstr "Mesaj de avertizare"
 
-#: includes/class-wc-alcohol.php:227
+#: includes/class-wc-alcohol.php:228
 msgid ""
 "Warning message displayed to the customers when trying to purchase products "
 "from the selected categories during restriction hours."
@@ -88,7 +88,7 @@ msgstr ""
 "din categoriile selectate în intervalul orar restricționat."
 
 #. translators: 1: Category name, 2: Restriction time start, 3: Restriction time end
-#: includes/class-wc-alcohol.php:229
+#: includes/class-wc-alcohol.php:230
 #, php-format
 msgid ""
 "Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time "
@@ -98,7 +98,7 @@ msgstr ""
 "restricție, <code>%3$s</code> - Sfârșit restricție"
 
 #. translators: 1: Category name, 2: Restriction time start, 3: Restriction time end
-#: includes/class-wc-alcohol.php:231
+#: includes/class-wc-alcohol.php:232
 #, php-format
 msgid ""
 "The sale of products in the \"%1$s\" category is prohibited from %2$s to "
@@ -107,14 +107,14 @@ msgstr ""
 "Produsele din categoria \"%1$s\" nu pot fi comercializate între orele %2$s - "
 "%3$s."
 
-#: includes/class-wc-alcohol.php:240
+#: includes/class-wc-alcohol.php:241
 msgid "Show warning on"
 msgstr "Arată avertisment pe"
 
-#: includes/class-wc-alcohol.php:241
+#: includes/class-wc-alcohol.php:242
 msgid "Product pages"
 msgstr "Pagini produse"
 
-#: includes/class-wc-alcohol.php:249
+#: includes/class-wc-alcohol.php:250
 msgid "Category pages"
 msgstr "Pagini categorii"

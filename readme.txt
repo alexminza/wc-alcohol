@@ -8,11 +8,11 @@ Requires PHP: 7.2.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Products sale limitations during legal restriction hours
+Products sale limitations during restriction hours.
 
 == Description ==
 
-Products sale limitations during legal restriction hours
+Products sale limitations during restriction hours.
 
 = Features =
 

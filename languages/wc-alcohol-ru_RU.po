@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Products Sale Restrictions for WooCommerce 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-alcohol\n"
-"POT-Creation-Date: 2026-02-07 08:51+0200\n"
-"PO-Revision-Date: 2026-02-07 09:22+0200\n"
+"POT-Creation-Date: 2026-02-07 11:01+0200\n"
+"PO-Revision-Date: 2026-02-07 11:02+0200\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -22,55 +22,63 @@ msgid "Products Sale Restrictions for WooCommerce"
 msgstr "Ограничения продажи товаров для WooCommerce"
 
 #. Description of the plugin
-#: wc-alcohol.php includes/class-wc-alcohol.php:168
+#: wc-alcohol.php includes/class-wc-alcohol.php:171
 msgid "Products sale limitations during restriction hours."
 msgstr "Запрет продажи товаров во время действия ограничений."
 
-#: includes/class-wc-alcohol.php:72
+#: includes/class-wc-alcohol.php:75
 msgid "Products sale restrictions"
 msgstr "Ограничения продажи товаров"
 
-#: includes/class-wc-alcohol.php:145
+#: includes/class-wc-alcohol.php:148
 msgid "Settings"
 msgstr "Настройки"
 
-#: includes/class-wc-alcohol.php:174
+#: includes/class-wc-alcohol.php:177
 msgid "Enable restrictions"
 msgstr "Включить ограничения"
 
-#: includes/class-wc-alcohol.php:175
+#: includes/class-wc-alcohol.php:178
 msgid "Enable sale limitations during restriction hours"
 msgstr "Включить запрет продажи товаров во время действия ограничений"
 
-#: includes/class-wc-alcohol.php:181
+#: includes/class-wc-alcohol.php:184
 msgid "Restriction time start"
 msgstr "Начало ограничения"
 
-#: includes/class-wc-alcohol.php:182
+#: includes/class-wc-alcohol.php:185
 msgid "Example: 22:00"
 msgstr "Пример: 22:00"
 
-#: includes/class-wc-alcohol.php:192
+#: includes/class-wc-alcohol.php:195
 msgid "Restriction time end"
 msgstr "Конец ограничения"
 
-#: includes/class-wc-alcohol.php:193
+#: includes/class-wc-alcohol.php:196
 msgid "Example: 09:00"
 msgstr "Пример: 09:00"
 
-#: includes/class-wc-alcohol.php:203
+#: includes/class-wc-alcohol.php:206
 msgid "Restricted categories"
 msgstr "Ограниченные категории"
 
-#: includes/class-wc-alcohol.php:208
+#: includes/class-wc-alcohol.php:211
 msgid "Select restricted categories"
 msgstr "Выберите ограниченные категории"
 
-#: includes/class-wc-alcohol.php:215
+#: includes/class-wc-alcohol.php:217
+msgid "Hierarchical restriction"
+msgstr "Иерархическое ограничение"
+
+#: includes/class-wc-alcohol.php:218
+msgid "Subcategories will inherit restrictions from their parent category."
+msgstr "Подкатегории унаследуют ограничения от родительской категории."
+
+#: includes/class-wc-alcohol.php:226
 msgid "Warning message"
 msgstr "Предупреждающее сообщение"
 
-#: includes/class-wc-alcohol.php:216
+#: includes/class-wc-alcohol.php:227
 msgid ""
 "Warning message displayed to the customers when trying to purchase products "
 "from the selected categories during restriction hours."
@@ -78,8 +86,8 @@ msgstr ""
 "Предупреждающее сообщение, отображаемое клиентам при попытке приобрести "
 "товары из выбранных категорий во время действия ограничений."
 
-#. translators: Example placeholders shown to user
-#: includes/class-wc-alcohol.php:218
+#. translators: 1: Category name, 2: Restriction time start, 3: Restriction time end
+#: includes/class-wc-alcohol.php:229
 #, php-format
 msgid ""
 "Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time "
@@ -88,22 +96,22 @@ msgstr ""
 "Формат: <code>%1$s</code> - Категория, <code>%2$s</code> - Начало "
 "ограничения, <code>%3$s</code> - Конец ограничения"
 
-#. translators: Example placeholders shown to user
-#: includes/class-wc-alcohol.php:220
+#. translators: 1: Category name, 2: Restriction time start, 3: Restriction time end
+#: includes/class-wc-alcohol.php:231
 #, php-format
 msgid ""
 "The sale of products in the \"%1$s\" category is prohibited from %2$s to "
 "%3$s."
 msgstr "Продажа товаров из категории “%1$s” запрещена с %2$s до %3$s."
 
-#: includes/class-wc-alcohol.php:229
+#: includes/class-wc-alcohol.php:240
 msgid "Show warning on"
 msgstr "Показывать предупреждение на"
 
-#: includes/class-wc-alcohol.php:230
+#: includes/class-wc-alcohol.php:241
 msgid "Product pages"
 msgstr "Страницах товаров"
 
-#: includes/class-wc-alcohol.php:238
+#: includes/class-wc-alcohol.php:249
 msgid "Category pages"
 msgstr "Страницах категорий"

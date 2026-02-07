@@ -215,7 +215,7 @@ class WC_Alcohol
             $settings_mod[] = array(
                 'id'       => self::MOD_SETTINGS_CATEGORY_HIERARCHICAL,
                 'name'     => __('Hierarchical restriction', 'wc-alcohol'),
-                'desc'     => __('Subcategories will inherit restrictions from their parents.', 'wc-alcohol'),
+                'desc'     => __('Subcategories will inherit restrictions from their parent category.', 'wc-alcohol'),
                 'type'     => 'checkbox',
                 'default'  => 'yes',
             );

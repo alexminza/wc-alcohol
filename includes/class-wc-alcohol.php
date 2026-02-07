@@ -225,9 +225,9 @@ class WC_Alcohol
                 'type'     => 'textarea',
                 'name'     => __('Warning message', 'wc-alcohol'),
                 'desc_tip' => __('Warning message displayed to the customers when trying to purchase products from the selected categories during restriction hours.', 'wc-alcohol'),
-                /* translators: Example placeholders shown to user */
+                /* translators: 1: Category name, 2: Restriction time start, 3: Restriction time end */
                 'desc'     => __('Format: <code>%1$s</code> - Category, <code>%2$s</code> - Restriction time start, <code>%3$s</code> - Restriction time end', 'wc-alcohol'),
-                /* translators: Example placeholders shown to user */
+                /* translators: 1: Category name, 2: Restriction time start, 3: Restriction time end */
                 'default'  => __('The sale of products in the "%1$s" category is prohibited from %2$s to %3$s.', 'wc-alcohol'),
                 'custom_attributes' => array(
                     'required' => 'required',

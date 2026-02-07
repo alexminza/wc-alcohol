@@ -410,13 +410,9 @@ class WC_Alcohol
 
         if (!empty($restricted_categories)) {
             $restricted_categories = array_unique($restricted_categories);
-
-            foreach ($restricted_categories as $category_slug) {
-                $warning_message = $this->get_warning_message($category_slug);
-
-                if (!empty($warning_message)) {
-                    wc_add_notice($warning_message, 'error');
-                }
+            $warning_message = $this->get_warning_message($restricted_categories);
+            if (!empty($warning_message)) {
+                wc_add_notice($warning_message, 'error');
             }
         }
     }
@@ -567,19 +563,57 @@ class WC_Alcohol
         return $this->restricted_ids;
     }
 
-    protected function get_warning_message(string $category_slug)
+    /**
+     * @param string|array $category_slugs
+     */
+    protected function get_warning_message($category_slugs)
     {
-        try {
-            $term = get_term_by('slug', $category_slug, 'product_cat');
-            $category_name = $term ? $term->name : $category_slug;
+        if (empty($category_slugs)) {
+            return null;
+        }
 
-            return do_shortcode(sprintf($this->warning_template, $category_name, $this->restriction_start, $this->restriction_end));
+        try {
+            $slugs = array_values( (array) $category_slugs);
+
+            $terms = get_terms(
+                array(
+                    'taxonomy'   => 'product_cat',
+                    'slug'       => $slugs,
+                    'hide_empty' => false,
+                )
+            );
+
+            if (is_wp_error($terms)) {
+                $this->log(
+                    'Error fetching warning message categories: ' . $terms->get_error_message(),
+                    \WC_Log_Levels::ERROR,
+                    array(
+                        'category_slugs' => $category_slugs,
+                        'slugs' => $slugs,
+                        'terms' => $terms,
+                        'backtrace' => true,
+                    )
+                );
+
+                return null;
+            }
+
+            $slug_name_map = wp_list_pluck($terms, 'name', 'slug');
+
+            $category_names = array();
+            foreach ($slugs as $slug) {
+                $category_names[] = $slug_name_map[$slug] ?? $slug;
+            }
+
+            $category_display_name = implode(', ', $category_names);
+
+            return do_shortcode(sprintf($this->warning_template, $category_display_name, $this->restriction_start, $this->restriction_end));
         } catch (\Throwable $ex) {
             $this->log(
                 $ex->getMessage(),
                 \WC_Log_Levels::ERROR,
                 array(
-                    'category_slug' => $category_slug,
+                    'category_slugs' => $category_slugs,
                     'exception' => (string) $ex,
                     'backtrace' => true,
                 )

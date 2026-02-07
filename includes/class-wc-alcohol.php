@@ -439,7 +439,7 @@ class WC_Alcohol
         if (is_product_category()) {
             $category = get_queried_object();
 
-            if (empty($category) || is_wp_error($category)) {
+            if (empty($category)) {
                 return;
             }
 

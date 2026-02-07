@@ -283,7 +283,7 @@ class WC_Alcohol
 
                 return false;
             }
-        } catch (\Exception $ex) {
+        } catch (\Throwable $ex) {
             $this->log(
                 $ex->getMessage(),
                 \WC_Log_Levels::ERROR,
@@ -328,7 +328,7 @@ class WC_Alcohol
             if ($this->is_restricted_category($category->slug)) {
                 return false;
             }
-        } catch (\Exception $ex) {
+        } catch (\Throwable $ex) {
             $this->log(
                 $ex->getMessage(),
                 \WC_Log_Levels::ERROR,

@@ -43,15 +43,6 @@ class WC_Alcohol
 
     private function __construct()
     {
-        $this->enabled               = wc_string_to_bool(get_option(self::MOD_SETTINGS_ENABLED, 'no'));
-        $this->restriction_start     = strval(get_option(self::MOD_SETTINGS_RESTRICTION_START, self::DEFAULT_RESTRICTION_START));
-        $this->restriction_end       = strval(get_option(self::MOD_SETTINGS_RESTRICTION_END, self::DEFAULT_RESTRICTION_END));
-        $this->restricted_categories = (array) get_option(self::MOD_SETTINGS_CATEGORY, array());
-        $this->warning_template      = strval(get_option(self::MOD_SETTINGS_WARNING));
-        $this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
-        $this->warn_category         = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes'));
-        $this->category_hierarchical = wc_string_to_bool(get_option(self::MOD_SETTINGS_CATEGORY_HIERARCHICAL, 'yes'));
-
         add_action('init', array($this, 'init'));
     }
 
@@ -72,6 +63,15 @@ class WC_Alcohol
 
     public function init()
     {
+        $this->enabled               = wc_string_to_bool(get_option(self::MOD_SETTINGS_ENABLED, 'no'));
+        $this->restriction_start     = strval(get_option(self::MOD_SETTINGS_RESTRICTION_START, self::DEFAULT_RESTRICTION_START));
+        $this->restriction_end       = strval(get_option(self::MOD_SETTINGS_RESTRICTION_END, self::DEFAULT_RESTRICTION_END));
+        $this->restricted_categories = (array) get_option(self::MOD_SETTINGS_CATEGORY, array());
+        $this->warning_template      = strval(get_option(self::MOD_SETTINGS_WARNING));
+        $this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
+        $this->warn_category         = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes'));
+        $this->category_hierarchical = wc_string_to_bool(get_option(self::MOD_SETTINGS_CATEGORY_HIERARCHICAL, 'yes'));
+
         $this->mod_title = __('Products sale restrictions', 'wc-alcohol');
 
         //region Parse restriction times strings

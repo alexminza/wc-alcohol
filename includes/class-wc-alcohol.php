@@ -250,19 +250,6 @@ class WC_Alcohol
             return $settings;
         }
     }
-
-    protected function get_product_categories()
-    {
-        $args = array(
-            'type'         => 'product',
-            'taxonomy'     => 'product_cat',
-            'hierarchical' => true,
-            'hide_empty'   => false,
-        );
-
-        // https://developer.wordpress.org/reference/functions/get_categories/
-        return get_categories($args);
-    }
     //endregion
 
     protected function validate_product(int $product_id, bool $notify = true)
@@ -451,8 +438,18 @@ class WC_Alcohol
     //region Utility
     protected function get_categories_list()
     {
-        $categories = $this->get_product_categories();
-        return wp_list_pluck($categories, 'name', 'slug');
+        $args = array(
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => false,
+        );
+
+        // https://developer.wordpress.org/reference/functions/get_categories/
+        $categories = get_categories($args);
+        $categories_list = wp_list_pluck($categories, 'name', 'slug');
+
+        asort($categories_list);
+
+        return $categories_list;
     }
 
     protected function is_restricted_category(string $category_slug)

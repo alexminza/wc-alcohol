@@ -20,10 +20,12 @@ class WC_Alcohol
     const MOD_SETTINGS_ENABLED           = self::MOD_SETTINGS_PREFIX . 'enabled';
     const MOD_SETTINGS_RESTRICTION_START = self::MOD_SETTINGS_PREFIX . 'restriction_start';
     const MOD_SETTINGS_RESTRICTION_END   = self::MOD_SETTINGS_PREFIX . 'restriction_end';
-    const MOD_SETTINGS_CATEGORY          = self::MOD_SETTINGS_PREFIX . 'category';
     const MOD_SETTINGS_WARNING           = self::MOD_SETTINGS_PREFIX . 'warning';
     const MOD_SETTINGS_WARN_PRODUCT      = self::MOD_SETTINGS_PREFIX . 'warn_product';
     const MOD_SETTINGS_WARN_CATEGORY     = self::MOD_SETTINGS_PREFIX . 'warn_category';
+
+    const MOD_SETTINGS_CATEGORY              = self::MOD_SETTINGS_PREFIX . 'category';
+    const MOD_SETTINGS_CATEGORY_HIERARCHICAL = self::MOD_SETTINGS_PREFIX . 'category_hierarchical';
 
     const DEFAULT_RESTRICTION_START = '22:00';
     const DEFAULT_RESTRICTION_END   = '09:00';
@@ -37,7 +39,7 @@ class WC_Alcohol
     protected static $instance = null;
 
     protected $enabled, $mod_title, $restriction_start, $restriction_end, $restriction_start_value, $restriction_end_value;
-    protected $restricted_categories, $warning_template, $warn_product, $warn_category;
+    protected $restricted_categories, $warning_template, $warn_product, $warn_category, $category_hierarchical;
 
     private function __construct()
     {
@@ -48,6 +50,7 @@ class WC_Alcohol
         $this->warning_template      = strval(get_option(self::MOD_SETTINGS_WARNING));
         $this->warn_product          = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_PRODUCT, 'yes'));
         $this->warn_category         = wc_string_to_bool(get_option(self::MOD_SETTINGS_WARN_CATEGORY, 'yes'));
+        $this->category_hierarchical = wc_string_to_bool(get_option(self::MOD_SETTINGS_CATEGORY_HIERARCHICAL, 'yes'));
 
         add_action('init', array($this, 'init'));
     }
@@ -210,6 +213,14 @@ class WC_Alcohol
             );
 
             $settings_mod[] = array(
+                'id'       => self::MOD_SETTINGS_CATEGORY_HIERARCHICAL,
+                'name'     => __('Hierarchical restriction', 'wc-alcohol'),
+                'desc'     => __('Subcategories will inherit restrictions from their parents.', 'wc-alcohol'),
+                'type'     => 'checkbox',
+                'default'  => 'yes',
+            );
+
+            $settings_mod[] = array(
                 'id'       => self::MOD_SETTINGS_WARNING,
                 'type'     => 'textarea',
                 'name'     => __('Warning message', 'wc-alcohol'),
@@ -297,7 +308,7 @@ class WC_Alcohol
         }
 
         foreach ($categories as $category) {
-            if ($this->is_restricted_category($category->slug)) {
+            if ($this->is_restricted_category($category)) {
                 return $category->slug; // Return first found restricted product category
             }
         }
@@ -312,7 +323,7 @@ class WC_Alcohol
                 return true;
             }
 
-            if ($this->is_restricted_category($category->slug)) {
+            if ($this->is_restricted_category($category)) {
                 return false;
             }
         } catch (\Throwable $ex) {
@@ -452,9 +463,28 @@ class WC_Alcohol
         return $categories_list;
     }
 
-    protected function is_restricted_category(string $category_slug)
+    /**
+     * Check if a category is restricted, including inheritance.
+     */
+    protected function is_restricted_category(\WP_Term $category)
     {
-        return in_array($category_slug, $this->restricted_categories, true);
+        // Check the category itself
+        if (in_array($category->slug, $this->restricted_categories, true)) {
+            return true;
+        }
+
+        // Check ancestors if hierarchical restriction is enabled
+        if ($this->category_hierarchical) {
+            $ancestors = get_ancestors($category->term_id, 'product_cat');
+            foreach ($ancestors as $ancestor_id) {
+                $ancestor = get_term($ancestor_id, 'product_cat');
+                if ($ancestor instanceof \WP_Term && in_array($ancestor->slug, $this->restricted_categories, true)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     protected function get_warning_message(string $category_slug)

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Products Sale Restrictions for WooCommerce 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-alcohol\n"
 "POT-Creation-Date: 2026-02-07 08:51+0200\n"
-"PO-Revision-Date: 2026-02-07 08:52+0200\n"
+"PO-Revision-Date: 2026-02-07 09:02+0200\n"
 "Last-Translator: Alexander Minza <alex@alexminza.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -40,7 +40,7 @@ msgstr "Включить ограничения"
 
 #: includes/class-wc-alcohol.php:175
 msgid "Enable sale limitations during restriction hours"
-msgstr "Включить запрет продажи алкоголя во время действия ограничений"
+msgstr "Включить запрет продажи товаров во время действия ограничений"
 
 #: includes/class-wc-alcohol.php:181
 msgid "Restriction time start"

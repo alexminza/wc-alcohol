@@ -257,17 +257,11 @@ class WC_Alcohol
             'type'         => 'product',
             'taxonomy'     => 'product_cat',
             'hierarchical' => true,
-            'hide_empty'   => 0,
+            'hide_empty'   => false,
         );
 
         // https://developer.wordpress.org/reference/functions/get_categories/
-        $categories = get_categories($args);
-
-        if (empty($categories) || is_wp_error($categories)) {
-            return array();
-        }
-
-        return $categories;
+        return get_categories($args);
     }
     //endregion
 

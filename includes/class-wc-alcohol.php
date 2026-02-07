@@ -473,7 +473,7 @@ class WC_Alcohol
             $category_name = $term ? $term->name : $category_slug;
 
             return do_shortcode(sprintf($this->warning_template, $category_name, $this->restriction_start, $this->restriction_end));
-        } catch (\Exception $ex) {
+        } catch (\Throwable $ex) {
             $this->log(
                 $ex->getMessage(),
                 \WC_Log_Levels::ERROR,

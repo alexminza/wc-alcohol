@@ -40,6 +40,7 @@ class WC_Alcohol
 
     protected $enabled, $mod_title, $restriction_start, $restriction_end, $restriction_start_value, $restriction_end_value;
     protected $restricted_categories, $warning_template, $warn_product, $warn_category, $category_hierarchical;
+    protected $restricted_ids = null, $category_restriction_cache = array(), $product_restriction_cache = array();
 
     private function __construct()
     {
@@ -300,19 +301,26 @@ class WC_Alcohol
 
     protected function get_product_restricted_category(int $product_id)
     {
+        if (isset($this->product_restriction_cache[$product_id])) {
+            return $this->product_restriction_cache[$product_id];
+        }
+
         // https://developer.wordpress.org/reference/functions/get_the_terms/
         $categories = get_the_terms($product_id, 'product_cat');
 
         if (empty($categories) || is_wp_error($categories)) {
+            $this->product_restriction_cache[$product_id] = null;
             return null;
         }
 
         foreach ($categories as $category) {
             if ($this->is_restricted_category($category)) {
+                $this->product_restriction_cache[$product_id] = $category->slug;
                 return $category->slug; // Return first found restricted product category
             }
         }
 
+        $this->product_restriction_cache[$product_id] = null;
         return null;
     }
 
@@ -468,23 +476,77 @@ class WC_Alcohol
      */
     protected function is_restricted_category(\WP_Term $category)
     {
+        if (isset($this->category_restriction_cache[$category->term_id])) {
+            return $this->category_restriction_cache[$category->term_id];
+        }
+
+        $restricted_ids = $this->get_restricted_category_ids();
+
+        if (empty($restricted_ids)) {
+            $this->category_restriction_cache[$category->term_id] = false;
+            return false;
+        }
+
         // Check the category itself
-        if (in_array($category->slug, $this->restricted_categories, true)) {
+        if (in_array($category->term_id, $restricted_ids, true)) {
+            $this->category_restriction_cache[$category->term_id] = true;
             return true;
         }
 
         // Check ancestors if hierarchical restriction is enabled
         if ($this->category_hierarchical) {
             $ancestors = get_ancestors($category->term_id, 'product_cat');
-            foreach ($ancestors as $ancestor_id) {
-                $ancestor = get_term($ancestor_id, 'product_cat');
-                if ($ancestor instanceof \WP_Term && in_array($ancestor->slug, $this->restricted_categories, true)) {
-                    return true;
-                }
+            if (!empty($ancestors) && array_intersect($ancestors, $restricted_ids)) {
+                $this->category_restriction_cache[$category->term_id] = true;
+                return true;
             }
         }
 
+        $this->category_restriction_cache[$category->term_id] = false;
         return false;
+    }
+
+    /**
+     * Get the IDs of restricted categories from their slugs.
+     *
+     * @return int[]
+     */
+    protected function get_restricted_category_ids()
+    {
+        if (null !== $this->restricted_ids) {
+            return $this->restricted_ids;
+        }
+
+        if (empty($this->restricted_categories)) {
+            $this->restricted_ids = array();
+            return $this->restricted_ids;
+        }
+
+        $ids = get_terms(
+            array(
+                'taxonomy'   => 'product_cat',
+                'slug'       => $this->restricted_categories,
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            )
+        );
+
+        if (is_wp_error($ids)) {
+            $this->log(
+                'Error fetching restricted category IDs: ' . $ids->get_error_message(),
+                \WC_Log_Levels::ERROR,
+                array(
+                    'ids' => $ids,
+                    'backtrace' => true,
+                )
+            );
+
+            $this->restricted_ids = array();
+            return $this->restricted_ids;
+        }
+
+        $this->restricted_ids = array_map('intval', $ids);
+        return $this->restricted_ids;
     }
 
     protected function get_warning_message(string $category_slug)

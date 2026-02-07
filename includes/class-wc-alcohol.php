@@ -394,11 +394,29 @@ class WC_Alcohol
             return;
         }
 
+        $restricted_categories = array();
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
             $product_id = intval($cart_item['product_id']);
 
-            if (!$this->validate_product($product_id, true)) {
+            if (!$this->validate_product($product_id, false)) {
+                $restricted_category = $this->get_product_restricted_category($product_id);
+                if (!empty($restricted_category)) {
+                    $restricted_categories[] = $restricted_category;
+                }
+
                 WC()->cart->remove_cart_item($cart_item_key);
+            }
+        }
+
+        if (!empty($restricted_categories)) {
+            $restricted_categories = array_unique($restricted_categories);
+
+            foreach ($restricted_categories as $category_slug) {
+                $warning_message = $this->get_warning_message($category_slug);
+
+                if (!empty($warning_message)) {
+                    wc_add_notice($warning_message, 'error');
+                }
             }
         }
     }

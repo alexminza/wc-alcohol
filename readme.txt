@@ -1,17 +1,18 @@
-=== Alcohol Sale Restrictions for WooCommerce ===
+=== Products Sale Restrictions for WooCommerce ===
 Contributors: alexminza
-Donate link: https://www.revolut.me/alexminza
-Tags: WooCommerce, alcohol, sale, time, restriction
+Tags: WooCommerce, products, sale, time, restriction
 Requires at least: 4.8
-Tested up to: 6.8
-Stable tag: 1.1.3
-Requires PHP: 7.0
+Tested up to: 6.9
+Stable tag: 1.2.0
+Requires PHP: 7.2.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
+Products sale limitations during restriction hours.
+
 == Description ==
 
-Alcohol sale limitations during legal restriction hours
+Products sale limitations during restriction hours.
 
 = Features =
 
@@ -25,7 +26,7 @@ Alcohol sale limitations during legal restriction hours
 
 = How can I configure the plugin settings? =
 
-Use the *WooCommerce > Settings > Products > Alcohol sale restrictions* screen to configure the plugin.
+Use the *WooCommerce > Settings > Products > Products sale restrictions* screen to configure the plugin.
 
 = How can I contribute to the plugin? =
 
@@ -42,6 +43,10 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 == Changelog ==
 
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
+
+= 1.2.0 =
+* Code reorganization and refactoring for better maintainability
+* Added WooCommerce compatibility declarations for Cart/Checkout blocks and product instance caching
 
 = 1.1.3 =
 Adjusted plugin name to comply with the [WooCommerce trademark guidelines](https://woocommerce.com/trademark-guidelines/).
@@ -83,6 +88,9 @@ Display warning options on product and category pages.
 Initial release.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Code reorganization and refactoring for better maintainability.
 
 = 1.1.3 =
 Adjusted plugin name to comply with the [WooCommerce trademark guidelines](https://woocommerce.com/trademark-guidelines/).

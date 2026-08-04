@@ -45,7 +45,7 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
 
 = 1.2.1 =
-Dependencies update.
+Updated compatibility requirements.
 
 = 1.2.0 =
 * Code reorganization and refactoring for better maintainability
@@ -93,7 +93,7 @@ Initial release.
 == Upgrade Notice ==
 
 = 1.2.1 =
-Dependencies update.
+Updated compatibility requirements.
 
 = 1.2.0 =
 Code reorganization and refactoring for better maintainability.

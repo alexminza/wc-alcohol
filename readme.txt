@@ -2,8 +2,8 @@
 Contributors: alexminza
 Tags: WooCommerce, products, sale, time, restriction
 Requires at least: 4.8
-Tested up to: 6.9
-Stable tag: 1.2.0
+Tested up to: 7.0
+Stable tag: 1.2.1
 Requires PHP: 7.2.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -43,6 +43,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 == Changelog ==
 
 See [wc-alcohol project releases on GitHub](https://github.com/alexminza/wc-alcohol/releases) for details.
+
+= 1.2.1 =
+Dependencies update.
 
 = 1.2.0 =
 * Code reorganization and refactoring for better maintainability
@@ -88,6 +91,9 @@ Display warning options on product and category pages.
 Initial release.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Dependencies update.
 
 = 1.2.0 =
 Code reorganization and refactoring for better maintainability.
